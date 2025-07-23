@@ -3,6 +3,9 @@
 # Start keybinds
 sxhkd &
 
+# Play intro video on login
+#mpv --no-border --geometry=100%x100% --fullscreen --no-osd-bar --quiet --mute=yes --vo=gpu --hwdec=auto ~/Videos/intro.mp4 &
+
 # Set your wallpaper
 feh --bg-scale ~/Pictures/cyper.jpg &
 
@@ -40,8 +43,8 @@ TERMINAL=kitty
 
 # Window gaps and borders
 bspc config border_width         2
-bspc config window_gap           7
-bspc config split_ratio          0.52
+bspc config window_gap           6
+bspc config split_ratio          0.5
 bspc config normal_border_color  "#661111"
 bspc config focused_border_color "#cc0000"
 
@@ -62,3 +65,4 @@ xinput set-prop "SYNA7DB5:00 06CB:CD41 Touchpad" "libinput Natural Scrolling Ena
 
 #when full sceen hide polybar 
 ~/.config/bspwm/fullscreen-watcher.sh &
+

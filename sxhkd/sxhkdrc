@@ -97,19 +97,16 @@ XF86RFKill
 super + f
     bspc node -t ~fullscreen
 
+# Resize window (hold Super + Alt and press Vim keys)
+# expand a window by moving one of its side outward
+super + alt + {h, j, k, l}
+    bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
 # Resize window (hold Super and press arrows)
-super + alt + Left
-    bspc node -z left -20 0
-
-super + alt + Right
-    bspc node -z right +20 0
-
-super + alt + Up
-    bspc node -z top 0 -20
-
-super + alt + Down
-    bspc node -z bottom 0 +20
-
+# expand a window by moving one of its side outward
+super + alt + {Left, Down, Up, Right}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+	
 # Toggle floating / tiling mode
 super + shift + space
     bspc node -t ~floating
@@ -133,4 +130,26 @@ super + p
 
 #super + f
 #    bspc node -t {tiled && polybar-msg cmd show,pseudo_tiled,fullscreen && polybar-msg cmd hide}
+
+#open notes app
+super + o
+    ~/Apps/Obsidian/Obsidian.AppImage
+
+# super + s
+#     bspc rule -a ScratchPad sticky=on state=floating rectangle=800x600+200+150 && \
+#     kitty --class ScratchPad -e nvim ~/scratchpad.md
+
+#open termina as a note thing
+super + s
+    bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
+    kitty --class ScratchPad -e nvim ~/scratchpad.md 
+
+#open file manger as sctrachpad
+#super + r
+#    bspc rule -a Ranger sticky=on state=floating center=on && \
+#    kitty --class Ranger -e ranger
+
+super + r
+    bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
+    kitty --class Ranger -e ranger
 

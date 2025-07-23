@@ -83,4 +83,12 @@ set timeoutlen=500
 set ttimeoutlen=0
 
 " Faster scrolling
-set lazyredraw
+set lazyredraw 
+
+"jj as a esvalpe
+inoremap jj <Esc>
+
+"just welcome note and welcome and stuff
+autocmd BufReadPost ~/scratchpad.md echohl String | echom "Welcome back to your notes!" | echohl None
+"autocmd BufReadPost ~/scratchpad.md  hi Normal guibg=#002b00 guifg=#aaffaa
+autocmd BufReadPost ~/scratchpad.md hi Normal guibg=#1e1e2e guifg=#cdd6f4
