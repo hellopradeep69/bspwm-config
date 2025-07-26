@@ -1,12 +1,18 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    # === Locale Fix for btop ===
+    set -x LANG en_IN.UTF-8
+    set -x LANGUAGE en_IN.UTF-8:en_US.UTF-8
+    set -x LC_ALL en_IN.UTF-8
+
     # Starship prompt
-        starship init fish | source
+    starship init fish | source
+
     # Run fastfetch without logo
-       # fastfetch --logo none
-       fastfetch --config ~/.config/fastfetch/config2.jsonc --logo-type none
-     # Alias for Brave browser
-        alias brave="brave-browser"
-    # alias for telegram
-        alias telegram="/opt/telegram/Telegram"    
+    fastfetch --config ~/.config/fastfetch/config2.jsonc --logo-type none
+
+    # Alias for Brave browser
+    alias brave="brave-browser"
+
+    # Alias for Telegram
+    alias telegram="/opt/telegram/Telegram"
 end

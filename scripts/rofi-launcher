@@ -1,0 +1,9 @@
+#!/bin/bash
+
+choice=$(printf " Apps (drun)\n Clipboard\n⏻ Power Menu" | rofi -dmenu -p "Launcher")
+
+case "$choice" in
+  *Apps*) rofi -show drun ;;
+  *Clipboard*) copyq show ;;
+  *Power*) ~/.local/bin/simple-powermenu ;;
+esac

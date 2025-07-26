@@ -4,7 +4,7 @@ super + Return
 	
 #open cool terminal
 super + c
-    cool-retro-term
+    ~/.local/bin/rofi-pkill.sh
 
 # YouTube App
 super + y
@@ -13,7 +13,11 @@ super + y
 # Brave browser
 super + b
   firefox
-    
+
+# Brave browser
+super + shift + b
+  qutebrowser
+      
 # Close window
 super + q
 	bspc node -c
@@ -117,7 +121,7 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize
 
 # Lock screen (black background)
-super + shift + x
+super + shift + s
     i3lock -c 282a36
 
 # Lock screen and suspend
@@ -149,7 +153,29 @@ super + s
 #    bspc rule -a Ranger sticky=on state=floating center=on && \
 #    kitty --class Ranger -e ranger
 
-super + r
+super + space
     bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
     kitty --class Ranger -e ranger
+
+# Hide focused window
+super + x
+    bspc node -g hidden=on
+
+
+# Unhide the last hidden window
+super + shift + x
+    ~/.local/bin/unhide_last.sh
+    
+# open kew as a scratchpad     
+super + m
+    bspc rule -a Kew state=floating sticky=on center=on rectangle=800x500+0+0 && \
+    kitty --class Kew -e kew
+
+#open notes rofi menu
+super + n
+    ~/.local/bin/rofinotes2.sh 
+
+#music player for rofi dmenu
+super + a
+    ~/.local/bin/rofipl.sh
 

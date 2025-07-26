@@ -66,3 +66,5 @@ xinput set-prop "SYNA7DB5:00 06CB:CD41 Touchpad" "libinput Natural Scrolling Ena
 #when full sceen hide polybar 
 ~/.config/bspwm/fullscreen-watcher.sh &
 
+#float rule for ranger
+bspc rule -a RANGER state=floating sticky=on center=on follow=on
