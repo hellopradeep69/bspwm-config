@@ -1,6 +1,6 @@
 #!/bin/sh
 
-TERMINAL="${TERMINAL:-kitty}"     # Or foot, alacritty, etc.
+TERMINAL="${TERMINAL:-wezterm}"     # Or foot, alacritty, etc.
 EDITOR="nvim"                     # You can change this to nano, micro, etc.
 NOTE_DIR="$HOME/Documents/Programming/"
 DESKTOP="6"

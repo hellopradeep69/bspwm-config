@@ -1,9 +1,15 @@
 # Terminal
 super + Return
-	kitty
-	
+    wezterm
+
+#open wez term
+# super + w
+    # /home/hellopradeep/Apps/wezterm/wezterm	
+super + w
+    kitty
+    
 #open cool terminal
-super + c
+Pause
     ~/.local/bin/rofi-pkill.sh
 
 # YouTube App
@@ -16,7 +22,7 @@ super + b
 
 # Brave browser
 super + shift + b
-  qutebrowser
+  brave
       
 # Close window
 super + q
@@ -54,6 +60,7 @@ super + Tab
 super + shift + q
 	pkill -u $USER
 
+#close the whole bspc {terror}
 super + ctrl + q
 	bspc quit
 
@@ -143,19 +150,20 @@ super + o
 #     bspc rule -a ScratchPad sticky=on state=floating rectangle=800x600+200+150 && \
 #     kitty --class ScratchPad -e nvim ~/scratchpad.md
 
-#open termina as a note thing
-super + s
-    bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
-    kitty --class ScratchPad -e nvim ~/scratchpad.md 
+#open termina as a note thing using kitty
+# super + s
+    # bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
+    # kitty --class ScratchPad -e nvim ~/scratchpad.md 
 
-#open file manger as sctrachpad
+#open file manger as sctrachpad capture a whole window no fit
 #super + r
 #    bspc rule -a Ranger sticky=on state=floating center=on && \
 #    kitty --class Ranger -e ranger
 
-super + space
-    bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
-    kitty --class Ranger -e ranger
+#open a rnager scrratch pad in kitty
+# super + space
+    # bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
+    # kitty --class Ranger -e ranger
 
 # Hide focused window
 super + x
@@ -177,5 +185,25 @@ super + n
 
 #music player for rofi dmenu
 super + a
-    ~/.local/bin/rofipl.sh
+    ~/.local/bin/rofipl2.sh
 
+#open clipboard using menu
+Menu 
+    ~/.local/bin/rofi-clipboard 
+
+#open notes rofi menu
+super + shift + n
+    ~/.local/bin/rofinotes.sh 
+
+# open rnager in a wezterm terminal
+super + space
+    bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
+    setsid wezterm start --class Ranger -- ranger > /dev/null 2>&1 &
+
+#open a quick notes taking using wezterm
+super + s
+    bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
+    setsid wezterm start --class ScratchPad -- nvim ~/scratchpad.md > /dev/null 2>&1 &
+
+
+# Scroll_Lock

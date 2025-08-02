@@ -66,21 +66,25 @@ case "$mode" in
         | jq -r --arg dir "$MUSIC_DIR/" '
             .data[] |
             (if .current == true then "▶️" else "  " end) + " " + (.filename | sub($dir; ""))' \
-        | rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎶 Playlist (▶️ = current)" || true
+        | rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎶 Playlist (▶️ = current) : " || true
         ;;
 
     "🎛️ Controls")
         [ ! -S "$SOCKET" ] && notify-send "MPV is not running" && exit
-        action=$(printf "⏸️ Pause/Resume\n⏭️ Next\n⏮️ Prev\n⏪ Back 10s\n⏩ Forward 10s\n🔁 Toggle Loop\n⏹️ Quit" \
-            | rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎵 Controls")
-        case "$action" in
-            "⏸️ Pause/Resume") echo '{ "command": ["cycle", "pause"] }' | socat - "$SOCKET" ;;
-            "⏭️ Next") echo '{ "command": ["playlist-next"] }' | socat - "$SOCKET" ;;
-            "⏮️ Prev") echo '{ "command": ["playlist-prev"] }' | socat - "$SOCKET" ;;
-            "⏪ Back 10s") echo '{ "command": ["seek", -10, "relative"] }' | socat - "$SOCKET" ;;
-            "⏩ Forward 10s") echo '{ "command": ["seek", 10, "relative"] }' | socat - "$SOCKET" ;;
-            "🔁 Toggle Loop") echo '{ "command": ["cycle", "loop-playlist"] }' | socat - "$SOCKET" ;;
-            "⏹️ Quit") echo '{ "command": ["quit"] }' | socat - "$SOCKET" ;;
-        esac
+        while true; do
+            action=$(printf "⏸️ Pause/Resume\n⏭️ Next\n⏮️ Prev\n⏪ Back 10s\n⏩ Forward 10s\n🔁 Toggle Loop\n⏹️ Quit" \
+                | rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎵 Controls : ")
+
+            case "$action" in
+                "⏸️ Pause/Resume") echo '{ "command": ["cycle", "pause"] }' | socat - "$SOCKET" ;;
+                "⏭️ Next") echo '{ "command": ["playlist-next"] }' | socat - "$SOCKET" ;;
+                "⏮️ Prev") echo '{ "command": ["playlist-prev"] }' | socat - "$SOCKET" ;;
+                "⏪ Back 10s") echo '{ "command": ["seek", -10, "relative"] }' | socat - "$SOCKET" ;;
+                "⏩ Forward 10s") echo '{ "command": ["seek", 10, "relative"] }' | socat - "$SOCKET" ;;
+                "🔁 Toggle Loop") echo '{ "command": ["cycle", "loop-playlist"] }' | socat - "$SOCKET" ;;
+                "⏹️ Quit") echo '{ "command": ["quit"] }' | socat - "$SOCKET" ; break ;;
+                "") break ;;
+            esac
+        done
         ;;
 esac
