@@ -150,6 +150,11 @@ configuration {
       sorting-method:    "name";
   }
 }
+
+configuration {
+  case-sensitive: false;
+}
 @theme "~/.config/rofi/themes/try.rasi"
 /* @theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"*/
+
 

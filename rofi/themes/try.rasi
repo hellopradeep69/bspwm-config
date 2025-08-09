@@ -22,11 +22,13 @@
   text-alt:   #b2b2b2;
   fg:         #abb2bf;
   bg:         #282c34;
+  bg2:        #E74C3CCC;
+  fg2:        #DEDEDE80;
 
   spacing: 0;
   background-color: transparent;
 
-  font: "Knack Nerd Font 14";
+  font: "Knack Nerd Font 16";
   text-color: @text;
 }
 
@@ -46,7 +48,7 @@ inputbar {
 }
 
 prompt {
-  text-color: @red;
+  text-color: @bg2;
 }
 
 textbox-prompt-colon {
@@ -56,6 +58,10 @@ textbox-prompt-colon {
 }
 
 entry {
+  font:   inherit;
+
+  placeholder         : "Search";
+  placeholder-color   : @fg2;
   margin: 0px 10px;
 }
 
@@ -73,12 +79,12 @@ element {
 }
 
 element selected {
-  background-color: @red;
+  background-color: @bg2;
   text-color: @text;
 }
 
 element urgent, element selected urgent {
-  text-color: @red;
+  text-color: @bg2;
 }
 
 element active, element selected active {

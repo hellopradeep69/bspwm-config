@@ -1,7 +1,9 @@
 #!/bin/sh
 
 # Start keybinds
-sxhkd &
+# sxhkd &
+# Start sxhkd if it's not already running
+pgrep -x sxhkd >/dev/null || sxhkd &
 
 # Play intro video on login
 #mpv --no-border --geometry=100%x100% --fullscreen --no-osd-bar --quiet --mute=yes --vo=gpu --hwdec=auto ~/Videos/intro.mp4 &
@@ -28,6 +30,7 @@ picom &
 xsetroot -cursor_name left_ptr
 
 # Custom scripts
+# ~/.local/bin/capslock-notify.sh
 ~/.local/bin/battery-notify.sh &
 ~/.config/i3/touchpad.sh &
 ~/.config/polybar/launch.sh --colorblocks &
