@@ -6,6 +6,11 @@ It’s designed to get my exact setup running in just a few minutes 🚀
 
 ---
 
+## 🌐 Zen Browser
+For the best browsing experience in your bspwm setup, it is **highly recommended to use [Zen Browser](https://zen-browser.app/)**. 
+
+**Download Zen Browser:** [https://zen-browser.app/](https://zen-browser.app/)
+
 ## 📦 Features
 
 - 🖥️ Installs all required software:
