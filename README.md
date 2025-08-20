@@ -70,7 +70,7 @@ It’s designed to get my exact setup running in just a few minutes 🚀
 
 ### 1. Clone the repo
 ```bash
-git clone https://github.com/yourusername/bspwm-config.git
+git clone https://github.com/hellopradeep69/bspwm-config
 cd bspwm-config
 ```
 
