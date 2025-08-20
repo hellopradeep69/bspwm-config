@@ -1,4 +1,3 @@
-
 # 🪴 BSPWM Rice Setup
 
 This repository contains my **BSPWM rice (dotfiles)** and a setup script that will  
@@ -227,4 +226,3 @@ chmod +x ~/.config/polybar/launch.sh --colorblocks
     nitrogen ~/Pictures
     ```  
     then pick the wallpaper from the UI.  
-
