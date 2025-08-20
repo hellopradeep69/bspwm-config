@@ -87,3 +87,12 @@ chmod +x setup.sh
 - **Copy scripts to ~/.local/bin.**
 - **Place special configs in the right location.**
 
+## ⚠️ Warnings / Notes
+- The wallpaper (`cyper.jpg`) is only copied to `~/Pictures`.  
+  You must manually set it depending on your wallpaper tool:
+  - For **feh**: add this line to your `~/.config/bspwm/bspwmrc`  
+    ```bash
+    feh --bg-scale ~/Pictures/cyper.jpg
+    ```
+  - For **nitrogen**: run `nitrogen ~/Pictures` and pick the wallpaper.
+
