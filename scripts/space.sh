@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Set wallpaper and generate colors using pywal
-wal -i ~/Pictures/cyper2.jpg
+wal -i ~/Downloads/space.jpg
 
 # Wait for wal to finish generating colors
 sleep 1
@@ -15,4 +15,4 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 0.2; done
 
 # Launch bar
-~/.config/polybar/launch.sh --hack
+~/.config/polybar/launch.sh --cuts

@@ -206,9 +206,9 @@ super + s
     bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
     setsid wezterm start --class ScratchPad -- nvim ~/scratchpad.md > /dev/null 2>&1 &
 
-# caps lock notification
-Caps_Lock
-    ~/.local/bin/capslock-notify.sh
+# # caps lock notification
+# Caps_Lock
+#     ~/.local/bin/capslock-notify.sh
 
 # toggle between keyboard
 Scroll_Lock

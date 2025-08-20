@@ -45,12 +45,14 @@
     highlight:     bold #ffffff;
 }
 window {
-    height:   90%;
+    height:   50%;
     width: 20em;
     location: west;
     anchor:   west;
     border:  0px 2px 0px 0px;
     text-color: @lightwhite;
+    y-offset:          -150px;
+    x-offset:           8px;
 }
 mode-switcher {
     border: 2px 0px 0px 0px;
@@ -67,7 +69,6 @@ button selected {
     text-color: @lightgreen;
 }
 inputbar {
-  children: [prompt, textbox-prompt-colon, entry, case-indicator];
     background-color: @lightblack;
     text-color: @lightgreen;
     padding: 4px;

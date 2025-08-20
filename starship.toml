@@ -1,4 +1,3 @@
-# Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
 # Inserts a blank line between shell prompts
@@ -18,3 +17,25 @@ disabled = true
 [python]
 disabled = true
 
+[lua]
+disabled = true
+
+[c]
+disabled=true
+
+[nodejs]
+disabled = true
+
+
+
+# [username]
+# show_always = true
+# style_user = "bg:surface0 fg:text"
+# style_root = "bg:surface0 fg:text"
+# format = '[ $user ]($style)'
+
+# [time]
+# disabled = false
+# time_format = "%R"
+# style = "bg:peach"
+# format = '[[  $time ](fg:mantle bg:purple)]($style)'

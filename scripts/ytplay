@@ -2,17 +2,17 @@
 
 query="$*"
 if [ -z "$query" ]; then
-  echo "Usage: ytplay <search query>"
-  exit 1
+    echo "Usage: ytplay <search query>"
+    exit 1
 fi
 
-# Get best audio URL only (avoid m3u8)
-url=$(yt-dlp -f "bestaudio[ext=m4a]" --no-playlist --get-url "ytsearch1:$query")
+# Get best available audio (don't force m4a)
+url=$(yt-dlp -f "bestaudio" --no-playlist --get-url "ytsearch1:$query")
 
 # If URL is empty or blocked
 if [ -z "$url" ]; then
-  echo "Failed to get stream. Try another query."
-  exit 1
+    echo "Failed to get stream. Try another query."
+    exit 1
 fi
 
 # Play it using mpv

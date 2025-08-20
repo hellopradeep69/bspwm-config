@@ -152,9 +152,18 @@ configuration {
 }
 
 configuration {
+    kb-row-up: "Up,k";
+    kb-row-down: "Down,Control+n,j";
+    // kb-row-first: "Home,g";
+    // kb-row-last: "End,G";
+    kb-accept-entry: "Return,l";
+    kb-cancel: "Escape,q";
+    kb-row-select: "Control+space";
+    kb-mode-complete: "Control+l";
   case-sensitive: false;
 }
-@theme "~/.config/rofi/themes/try.rasi"
+//@theme "~/.config/rofi/themes/try.rasi"
 /* @theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"*/
 
 
+@theme "/home/hellopradeep/.config/rofi/themes/try.rasi"

@@ -1,0 +1,24 @@
+
+#!/bin/bash
+# Rofi menu to toggle Right Alt → Escape
+
+# Check current mapping
+current=$(xmodmap -pke | grep -w "keycode 108" | grep "Escape")
+
+# Rofi menu options
+options="Enable\nDisable\nQuit"
+choice=$(echo  "$options" | rofi -dmenu -p "Right Alt → Escape")
+
+case "$choice" in
+    Enable)
+        xmodmap -e "keycode 108 = Escape"
+        notify-send "Key Remap" "Right Alt → Escape enabled"
+        ;;
+    Disable)
+        xmodmap -e "keycode 108 = Alt_R"
+        notify-send "Key Remap" "Right Alt restored"
+        ;;
+    Quit|*)
+        exit 0
+        ;;
+esac

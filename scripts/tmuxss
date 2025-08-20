@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+# tmux-session-switcher.sh
+
+# Detach if inside tmux
+[ -n "$TMUX" ] && tmux detach
+
+# List existing sessions with info
+sessions=$(tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" 2>/dev/null)
+
+# Convert session_created to human-readable
+sessions=$(echo "$sessions" | while read line; do
+    name=$(echo "$line" | awk '{print $1}')
+    ts=$(echo "$line" | grep -oP '\d{10}')
+    date_str=$(date -d @"$ts" '+%b %d %Y %H:%M')
+    echo "$name (${line#* } created: $date_str)"
+done)
+
+# Add options to create or delete a session
+sessions="${sessions}"$'\n'"[New session]"$'\n'"[Delete session]"
+
+# Use fzf to select or create
+selected=$(echo "$sessions" | fzf \
+    --prompt="Select tmux action: " \
+    --height=15 \
+    --border \
+    --reverse \
+    --bind "j:down,k:up" \
+    --ansi \
+    --cycle)
+
+# Handle new session
+if [[ "$selected" == "[New session]" ]]; then
+    read -rp "Enter new session name: " session_name
+    if [ -n "$session_name" ]; then
+        tmux new-session -s "$session_name"
+        notify-send "Tmux Session" "New session '$session_name' created."
+    fi
+
+# Handle delete session
+elif [[ "$selected" == "[Delete session]" ]]; then
+    # Select session to delete
+    # Select session to delete
+    del_session=$(tmux list-sessions -F "#{session_name}" | fzf \
+        --prompt="Select session to delete: " \
+        --height=12 \
+        --border \
+        --reverse \
+        --bind "j:down,k:up" \
+        --cycle)
+    if [ -n "$del_session" ]; then
+        read -rp "Are you sure you want to delete session '$del_session'? [y/N]: " confirm
+        if [[ "$confirm" =~ ^[Yy]$ ]]; then
+            tmux kill-session -t "$del_session"
+            notify-send "Tmux Session" "Session '$del_session' deleted."
+        else
+            notify-send "Tmux Session" "Deletion of '$del_session' cancelled."
+        fi
+    fi
+
+# Handle attach existing session
+else
+    # Extract session name from selection
+    session_name=$(echo "$selected" | awk '{print $1}')
+    if [ -n "$session_name" ]; then
+        if [ -n "$TMUX" ]; then
+            tmux switch-client -t "$session_name"
+        else
+            tmux attach-session -t "$session_name"
+        fi
+        notify-send "Tmux Session" "detached session '$session_name'."
+    fi
+fi

@@ -13,6 +13,11 @@ if status is-interactive
         bind -M insert jj 'set fish_bind_mode default; commandline -f repaint'
     end
 
+    function ff
+        fzf --bind=j:down,k:up,q:abort \
+            --preview "batcat --style=numbers --color=always {}"
+    end
+
     # Initialize Starship prompt
     starship init fish | source
 
@@ -24,7 +29,7 @@ if status is-interactive
 
     # Alias to launch Telegram
     alias telegram="/opt/telegram/Telegram"
-    
+
     # 👉 Alias to exit shell using :q (like in Vim)
     alias :q="exit"
 end

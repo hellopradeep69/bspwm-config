@@ -1,0 +1,33 @@
+
+#!/bin/bash
+
+# Detect current option
+current_option=$(setxkbmap -query | grep options | awk '{print $2}')
+
+# Menu entries
+menu="$(printf "Normal Layout\nSwap Ctrl ↔ Caps Lock\nCaps Lock as Ctrl")"
+
+# Preselect depending on current option
+if [[ "$current_option" == "ctrl:swapcaps" ]]; then
+    choice=$(echo "$menu" | rofi -dmenu -p "Keyboard Layout" -selected-row 1)
+elif [[ "$current_option" == "ctrl:nocaps" ]]; then
+    choice=$(echo "$menu" | rofi -dmenu -p "Keyboard Layout" -selected-row 2)
+else
+    choice=$(echo "$menu" | rofi -dmenu -p "Keyboard Layout" -selected-row 0)
+fi
+
+# Apply based on choice
+case "$choice" in
+    "Normal Layout")
+        setxkbmap -option
+        notify-send "Keyboard Layout" "Now using Normal layout"
+        ;;
+    "Swap Ctrl ↔ Caps Lock")
+        setxkbmap -option ctrl:swapcaps
+        notify-send "Keyboard Layout" "Swapped Ctrl ↔ Caps Lock"
+        ;;
+    "Caps Lock as Ctrl")
+        setxkbmap -option ctrl:nocaps
+        notify-send "Keyboard Layout" "Caps Lock is now Ctrl"
+        ;;
+esac
