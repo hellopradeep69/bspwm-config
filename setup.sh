@@ -4,6 +4,7 @@
 BACKUP_DIR="$(pwd)" # run from backup repo root
 CONFIG_DIR="$HOME/.config"
 LOCAL_BIN="$HOME/.local/bin"
+BACKUP_DEST="$HOME/config_backup/$(date +%Y-%m-%d_%H-%M-%S)"
 
 # Full list of packages (generic names)
 PACKAGES=(
@@ -64,37 +65,53 @@ install_packages() {
     esac
 }
 
+backup_config() {
+    src="$1"
+    dest="$CONFIG_DIR/$src"
+
+    if [ -d "$dest" ]; then
+        echo "📦 Backing up $src -> $BACKUP_DEST/$src"
+        mkdir -p "$BACKUP_DEST"
+        mv "$dest" "$BACKUP_DEST/"
+    fi
+}
+
 install_config() {
     src="$1"
     dest="$CONFIG_DIR/$src"
 
     echo "-> Installing config for $src"
     mkdir -p "$CONFIG_DIR"
-    rm -rf "$dest"
     cp -r "$BACKUP_DIR/$src" "$dest"
 }
 
 # === MAIN ===
 echo "⚡ Starting full bspwm rice setup..."
+echo "📦 Backups will be stored in: $BACKUP_DEST"
 
 # Step 1: Install all packages
 install_packages
 
-# Step 2: Restore configs
+# Step 2: Backup + Restore configs
 for dir in bspwm fish kitty alacritty nitrogen nvim picom polybar ranger rofi sxhkd dunst; do
     if [ -d "$BACKUP_DIR/$dir" ]; then
+        backup_config "$dir"
         install_config "$dir"
     fi
 done
 
 # Step 3: starship.toml -> ~/.config
 if [ -f "$BACKUP_DIR/starship.toml" ]; then
+    echo "-> Backing up old starship.toml (if any)"
+    [ -f "$CONFIG_DIR/starship.toml" ] && mkdir -p "$BACKUP_DEST" && mv "$CONFIG_DIR/starship.toml" "$BACKUP_DEST/"
     echo "-> Installing starship.toml"
     cp "$BACKUP_DIR/starship.toml" "$CONFIG_DIR/starship.toml"
 fi
 
 # Step 4: Wezterm config -> ~/.wezterm.lua
 if [ -f "$BACKUP_DIR/.wezterm.lua" ]; then
+    echo "-> Backing up old wezterm config (if any)"
+    [ -f "$HOME/.wezterm.lua" ] && mkdir -p "$BACKUP_DEST" && mv "$HOME/.wezterm.lua" "$BACKUP_DEST/"
     echo "-> Installing wezterm config (~/.wezterm.lua)"
     cp "$BACKUP_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
 fi
@@ -106,5 +123,13 @@ if [ -d "$BACKUP_DIR/scripts" ]; then
     cp -r "$BACKUP_DIR/scripts/"* "$LOCAL_BIN"
 fi
 
+# Step 6: Wallpaper -> ~/Pictures
+if [ -f "$BACKUP_DIR/cyper.jpg" ]; then
+    echo "🖼️ Installing wallpaper -> ~/Pictures/cyper.jpg"
+    mkdir -p "$HOME/Pictures"
+    cp "$BACKUP_DIR/cyper.jpg" "$HOME/Pictures/cyper.jpg"
+fi
+
 echo "✅ Setup complete!"
+echo "📦 Backups saved in: $BACKUP_DEST"
 echo "👉 Log out and choose bspwm in your login manager, or run 'startx' if using xinit."
