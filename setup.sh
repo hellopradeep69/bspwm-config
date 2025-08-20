@@ -72,7 +72,8 @@ backup_config() {
     if [ -d "$dest" ]; then
         echo "📦 Backing up $src -> $BACKUP_DEST/$src"
         mkdir -p "$BACKUP_DEST"
-        mv "$dest" "$BACKUP_DEST/"
+        cp -r "$dest" "$BACKUP_DEST/"
+        rm -rf "$dest"
     fi
 }
 
