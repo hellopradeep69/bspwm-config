@@ -207,7 +207,8 @@ chmod +x ~/.config/polybar/launch.sh --colorblocks
 
 ## ⚠️ Warnings / Notes
 
-- Running the setup will **overwrite existing configs** in `~/.config/`. Backups are created, but double-check before proceeding.  
+- Orginal created for linux mint user ! be aware if you use other distos 
+- Running the setup will **overwrite existing configs** in `~/.config/`. Backups are created, but double-check before proceeding. 
 - Some apps (e.g., `wezterm`) may not exist in your distro’s repos. You might need to install them manually.  
 - Scripts from `scripts/` are copied into `~/.local/bin` and may **replace existing scripts** with the same name.  
 - `starship.toml` and `.wezterm.lua` in your home directory will be **overwritten**. Backup your own configs first if needed.  
