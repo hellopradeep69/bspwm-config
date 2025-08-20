@@ -81,7 +81,7 @@ echo "⚡ Starting full bspwm rice setup..."
 install_packages
 
 # Step 2: Restore configs
-for dir in bspwm fish kitty wezterm alacritty nitrogen nvim picom polybar ranger rofi sxhkd dunst; do
+for dir in bspwm fish kitty alacritty nitrogen nvim picom polybar ranger rofi sxhkd dunst; do
     if [ -d "$BACKUP_DIR/$dir" ]; then
         install_config "$dir"
     fi
@@ -93,7 +93,13 @@ if [ -f "$BACKUP_DIR/starship.toml" ]; then
     cp "$BACKUP_DIR/starship.toml" "$CONFIG_DIR/starship.toml"
 fi
 
-# Step 4: Scripts -> ~/.local/bin
+# Step 4: Wezterm config -> ~/.wezterm.lua
+if [ -f "$BACKUP_DIR/.wezterm.lua" ]; then
+    echo "-> Installing wezterm config (~/.wezterm.lua)"
+    cp "$BACKUP_DIR/.wezterm.lua" "$HOME/.wezterm.lua"
+fi
+
+# Step 5: Scripts -> ~/.local/bin
 if [ -d "$BACKUP_DIR/scripts" ]; then
     echo "-> Installing scripts into $LOCAL_BIN"
     mkdir -p "$LOCAL_BIN"
