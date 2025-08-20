@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Ghostty
+Comment=GPU-accelerated terminal emulator
+Exec=/home/hellopradeep/Downloads/Ghostty-1.1.3-x86_64.AppImage
+Icon=utilities-terminal
+Terminal=false
+Type=Application
+Categories=System;TerminalEmulator;
+StartupNotify=true
+

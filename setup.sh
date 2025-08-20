@@ -131,6 +131,12 @@ if [ -f "$BACKUP_DIR/cyper.jpg" ]; then
     cp "$BACKUP_DIR/cyper.jpg" "$HOME/Pictures/cyper.jpg"
 fi
 
+# Step 7: Desktop shortcuts -> ~/.local/share/applications
+if [ -d "$BACKUP_DIR/desktop" ]; then
+    echo "🖥️ Installing desktop shortcuts -> ~/.local/share/applications"
+    mkdir -p "$HOME/.local/share/applications"
+    cp -r "$BACKUP_DIR/desktop/"* "$HOME/.local/share/applications/"
+fi
 echo "✅ Setup complete!"
 echo "📦 Backups saved in: $BACKUP_DEST"
 echo "👉 Log out and choose bspwm in your login manager, or run 'startx' if using xinit."
