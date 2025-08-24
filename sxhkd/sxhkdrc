@@ -87,9 +87,11 @@ shift + Print
 
 # Brightness
 XF86MonBrightnessUp
-  ~/.local/bin/brightness-notify.sh +5%
+  ~/.local/bin/brightness-notify2.sh +5%
+  # ~/.local/bin/brightness-notify.sh +5%
 XF86MonBrightnessDown
-  ~/.local/bin/brightness-notify.sh 5%-
+  ~/.local/bin/brightness-notify2.sh 5%-
+  # ~/.local/bin/brightness-notify.sh 5%-
 
 # Volume
 XF86AudioRaiseVolume

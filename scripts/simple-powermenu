@@ -7,25 +7,25 @@ action=$(printf "Lock\nSuspend\nLogout\nReboot\nPoweroff" | rofi -dmenu -p "Powe
 WM=$(echo "$XDG_CURRENT_DESKTOP $DESKTOP_SESSION $XDG_SESSION_DESKTOP $WINDOW_MANAGER" | tr '[:upper:]' '[:lower:]')
 
 case "$action" in
-  Lock)
+Lock)
     i3lock -c 282a36
     ;;
-  Suspend)
+Suspend)
     i3lock -c 282a36 && systemctl suspend
     ;;
-  Logout)
+Logout)
     if [[ $WM == *i3* ]]; then
-      i3-msg exit
+        i3-msg exit
     elif [[ $WM == *bspwm* ]]; then
-      bspc quit
+        bspc quit
     else
-      echo "Unknown WM. Cannot logout." | rofi -dmenu -p "Error"
+        echo "Unknown WM. Cannot logout." | rofi -dmenu -p "Error"
     fi
     ;;
-  Reboot)
+Reboot)
     systemctl reboot
     ;;
-  Poweroff)
+Poweroff)
     systemctl poweroff
     ;;
 esac

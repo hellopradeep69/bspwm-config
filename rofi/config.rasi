@@ -156,7 +156,7 @@ configuration {
     kb-row-down: "Down,Control+n,j";
     // kb-row-first: "Home,g";
     // kb-row-last: "End,G";
-    kb-accept-entry: "Return,l";
+    // kb-accept-entry: "Return,l";
     kb-cancel: "Escape,q";
     kb-row-select: "Control+space";
     kb-mode-complete: "Control+l";

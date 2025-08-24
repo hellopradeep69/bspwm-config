@@ -6,7 +6,7 @@
 pgrep -x sxhkd >/dev/null || sxhkd &
 
 # Play intro video on login
-#mpv --no-border --geometry=100%x100% --fullscreen --no-osd-bar --quiet --mute=yes --vo=gpu --hwdec=auto ~/Videos/intro.mp4 &
+# mpv --no-border --geometry=100%x100% --fullscreen --no-osd-bar --quiet --mute=yes --vo=gpu --hwdec=auto ~/Videos/intro.mp4 &
 
 # Set your wallpaper
 feh --bg-scale ~/Pictures/cyper.jpg &
@@ -32,7 +32,8 @@ xsetroot -cursor_name left_ptr
 # Custom scripts
 # ~/.local/bin/capslock-notify.sh
 # ~/.local/bin/dunstsound.sh &
-~/.local/bin/battery-notify.sh &
+# ~/.local/bin/battery-notify.sh &
+~/.local/bin/battery-notify2.sh &
 # ~/.local/bin/sound.sh &
 ~/.config/i3/touchpad.sh &
 ~/.config/polybar/launch.sh --colorblocks &
@@ -74,3 +75,6 @@ xinput set-prop "SYNA7DB5:00 06CB:CD41 Touchpad" "libinput Natural Scrolling Ena
 
 #float rule for ranger
 bspc rule -a RANGER state=floating sticky=on center=on follow=on
+
+# Float gnome-screenshot windows
+bspc rule -a Gnome-screenshot state=floating center=on

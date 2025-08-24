@@ -116,7 +116,7 @@ return {
 		-- Open new tab with Ctrl+T
 		{
 			key = "t",
-			mods = "CTRL",
+			mods = "ALT",
 			action = wezterm.action.SpawnTab("CurrentPaneDomain"),
 		},
 

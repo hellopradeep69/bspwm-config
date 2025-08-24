@@ -24,6 +24,9 @@ if status is-interactive
     # Run Fastfetch on shell start without logo
     fastfetch --config ~/.config/fastfetch/config2.jsonc --logo-type none
 
+    # Alias to eza as ls 
+    # alias ls="eza --icons --group-directories-first"
+
     # Alias to launch Brave browser
     alias brave="brave-browser"
 

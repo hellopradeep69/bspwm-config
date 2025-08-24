@@ -21,12 +21,16 @@ disabled = true
 disabled = true
 
 [c]
-disabled=true
+disabled = true
 
 [nodejs]
 disabled = true
 
+[ruby]
+disabled = true
 
+[rust]
+disabled = true
 
 # [username]
 # show_always = true

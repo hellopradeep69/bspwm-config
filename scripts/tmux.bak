@@ -87,7 +87,8 @@ selected_window=$(echo "$windows" | fzf \
     --height=12 \
     --border \
     --reverse \
-    --bind "j:down,k:up,q:abort")
+    --bind "j:down,k:up,q:abort" \
+    --preview 'tmux list-panes -t {1} -F "#{pane_index}: #{pane_current_command}"')
 
 # Abort if nothing selected
 [ -z "$selected_window" ] && exit 0

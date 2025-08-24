@@ -3,15 +3,19 @@ return {
   lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
   opts = function()
     local logo = [[
-         ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-         ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z    
-         █s█║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z       
-         ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z         
-         ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║           
-         ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝           
+
+     $$\   $$\           $$\ $$\           
+     $$ |  $$ |          $$ |$$ |          
+     $$ |  $$ | $$$$$$\  $$ |$$ | $$$$$$\  
+     $$$$$$$$ |$$  __$$\ $$ |$$ |$$  __$$\ 
+     $$  __$$ |$$$$$$$$ |$$ |$$ |$$ /  $$ |
+     $$ |  $$ |$$   ____|$$ |$$ |$$ |  $$ |
+     $$ |  $$ |\$$$$$$$\ $$ |$$ |\$$$$$$  |
+     \__|  \__| \_______|\__|\__| \______/ 
+
     ]]
 
-    logo = string.rep("\n", 8) .. logo .. "\n\n"
+    -- logo = string.rep("\n", 8) .. logo .. "\n"
 
     local opts = {
       theme = "doom",
@@ -34,11 +38,16 @@ return {
           { action = "Lazy",                                           desc = " Lazy",            icon = "󰒲 ", key = "l" },
           { action = function() vim.api.nvim_input("<cmd>qa<cr>") end, desc = " Quit",            icon = " ", key = "q" },
         },
-        footer = function()
-          local stats = require("lazy").stats()
-          local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-          return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
-        end,
+        -- footer = function()
+        footer = {},
+        --   local stats = require("lazy").stats()
+        --   local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+        --   return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
+        -- end,
+        --
+        -- footer = {
+        --   "hellopradeep!",
+        -- },
       },
     }
 

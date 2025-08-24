@@ -8,7 +8,7 @@ bold_italic_font JetBrainsMono Nerd Font Bold Italic
 font_size        12.0
 
 # Opacity
-background_opacity 0.80
+# background_opacity 0.80
 
 # Clipboard key bindings
 map ctrl+c copy_to_clipboard
@@ -19,4 +19,11 @@ map ctrl+shift+c send_text all \x03  # Send SIGINT
 #include themes/Tokyonight.conf
 include current-theme.conf
 
+tab_bar_edge top
+tab_bar_style powerline
 
+
+# BEGIN_KITTY_THEME
+# Gruvbox Dark Hard
+include current-theme.conf
+# END_KITTY_THEME
