@@ -7,4 +7,5 @@ return {
     --       'echasnovski/mini.pick',
     -- 'folke/snacks.nvim',
   },
+  event = { "BufRead *.html", "BufRead *.md", "BufRead *.css" },
 }

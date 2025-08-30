@@ -21,5 +21,6 @@ else
 fi
 
 # Send notification (with progress bar + replace old one)
-notify-send -u low "$icon Brightness" "$level%  [$bar]" \
+# notify-send -u low "$icon Brightness" "$level%  [$bar]" \
+notify-send -u low " $icon Brightness " \
     -h int:value:"$level" -h string:synchronous:brightness

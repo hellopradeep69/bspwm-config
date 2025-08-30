@@ -128,7 +128,7 @@ super + shift + space
 # Allow pointer dragging for floating windows
 bspc config pointer_modifier mod4  # Super key
 bspc config pointer_action1 move
-bspc config pointer_action2 resize
+bspc config pointer_action3 resize
 
 # Lock screen (black background)
 super + shift + s

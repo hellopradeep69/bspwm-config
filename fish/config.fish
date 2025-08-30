@@ -1,5 +1,8 @@
 if status is-interactive
 
+    # fzf change setting
+    # set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,ctrl-j:page-down,ctrl-k:page-up,q:abort '
+
     # Locale fix for UTF-8 and tools like btop
     set -x LANG en_IN.UTF-8
     set -x LANGUAGE en_IN.UTF-8:en_US.UTF-8
