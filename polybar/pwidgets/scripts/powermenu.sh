@@ -5,7 +5,7 @@
 ## Github  : @adi1090x
 ## Twitter : @adi1090x
 
-dir="~/.config/polybar/pwidgets/scripts/rofi"
+dir="~/.config/polybar/colorblocks/scripts/rofi"
 uptime=$(uptime -p | sed -e 's/up //g')
 
 rofi_command="rofi -no-config -theme $dir/powermenu.rasi"
@@ -29,7 +29,7 @@ confirm_exit() {
 
 # Message
 msg() {
-	rofi -no-config -theme "$dir/message.rasi" -e "Options : yes / y / no / n"
+	rofi -no-config -theme "$dir/message.rasi" -e "Available Options  -  yes / y / no / n"
 }
 
 # Variable passed to rofi

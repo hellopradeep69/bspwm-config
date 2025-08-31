@@ -26,6 +26,7 @@ if status is-interactive
 
     # Run Fastfetch on shell start without logo
     fastfetch --config ~/.config/fastfetch/config2.jsonc --logo-type none
+    # cat anime.txt
 
     # Alias to eza as ls 
     # alias ls="eza --icons --group-directories-first"

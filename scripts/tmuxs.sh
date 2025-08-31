@@ -1,35 +1,100 @@
 #!/usr/bin/env bash
-# tmux-session-switcher.sh
+# tmux-fzf-dashboard.sh
+# Tmux session/window selector with FZF (no predefined sessions, q to abort)
 
 # Detach if inside tmux
 [ -n "$TMUX" ] && tmux detach
 
-# List existing sessions with info
-sessions=$(tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" 2>/dev/null)
+# -------------------------------
+# FUNCTIONS
+# -------------------------------
 
-# Add option to create a new session
-sessions="${sessions}"$'\n'"[New session]"
+list_sessions() {
+    tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" 2>/dev/null
+}
 
-# Use fzf to select or create
-selected=$(echo "$sessions" | fzf \
-    --prompt="Select or create tmux session: " \
+format_session() {
+    local line="$1"
+    local name ts date_str
+    name=$(echo "$line" | awk '{print $1}')
+    ts=$(echo "$line" | grep -oP '\d{10}')
+    date_str=$(date -d @"$ts" '+%b %d %Y %H:%M')
+    echo "$name (${line#* } created: $date_str)"
+}
+
+session_exists() {
+    tmux has-session -t "$1" 2>/dev/null
+}
+
+# -------------------------------
+# BUILD SESSION LIST
+# -------------------------------
+sessions=""
+existing=$(list_sessions)
+if [ -n "$existing" ]; then
+    while read -r line; do
+        sessions+=$(format_session "$line")$'\n'
+    done <<<"$existing"
+fi
+
+sessions+=$'\n'"[New session]"$'\n'"[Delete session]"
+
+# -------------------------------
+# SELECT SESSION
+# -------------------------------
+selected_session=$(echo -e "$sessions" | fzf \
+    --prompt="Select tmux session (q to quit): " \
+    --height=15 \
+    --border \
+    --reverse \
+    --bind "j:down,k:up,q:abort" \
+    --preview 'tmux list-windows -t {1} -F "#{window_index}: #{window_name} #{pane_current_command}"' \
+    --cycle)
+
+# Abort if nothing selected
+[ -z "$selected_session" ] && exit 0
+
+# -------------------------------
+# HANDLE SPECIAL OPTIONS
+# -------------------------------
+if [[ "$selected_session" == "[New session]" ]]; then
+    read -rp "Enter new session name: " session_name
+    [ -n "$session_name" ] && tmux new-session -s "$session_name"
+    exit 0
+fi
+
+if [[ "$selected_session" == "[Delete session]" ]]; then
+    del_session=$(tmux list-sessions -F "#{session_name}" | fzf --prompt="Select session to delete (q to quit): " --bind "q:abort")
+    [ -n "$del_session" ] && tmux kill-session -t "$del_session"
+    exit 0
+fi
+
+# Strip ANSI codes and extract session name
+session_name=$(echo "$selected_session" | sed 's/\x1b\[[0-9;]*m//g' | awk '{print $1}')
+
+# -------------------------------
+# SELECT WINDOW
+# -------------------------------
+windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
+if [ -z "$windows" ]; then
+    echo "No windows in session $session_name. Creating one..."
+    tmux new-window -t "$session_name" -n "main"
+    windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
+fi
+
+selected_window=$(echo "$windows" | fzf \
+    --prompt="Select window (q to quit): " \
     --height=12 \
     --border \
     --reverse \
-    --bind "j:down,k:up" \
-    --ansi \
-    --cycle)
+    --bind "j:down,k:up,q:abort")
 
-# Check if user wants to create a new session
-if [[ "$selected" == "[New session]" ]]; then
-    read -rp "Enter new session name: " session_name
-    if [ -n "$session_name" ]; then
-        tmux new-session -s "$session_name"
-    fi
-else
-    # Extract session name from selection
-    session_name=$(echo "$selected" | awk '{print $1}')
-    if [ -n "$session_name" ]; then
-        tmux attach-session -t "$session_name"
-    fi
-fi
+# Abort if nothing selected
+[ -z "$selected_window" ] && exit 0
+
+window_index=$(echo "$selected_window" | cut -d':' -f1)
+
+# -------------------------------
+# ATTACH TO SELECTED
+# -------------------------------
+tmux attach-session -t "$session_name" \; select-window -t "$window_index"

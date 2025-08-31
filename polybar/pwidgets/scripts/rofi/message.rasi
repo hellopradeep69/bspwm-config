@@ -9,17 +9,16 @@
 }
 
 window {
-    width:      			230px;
-    padding:    			20px;
-    border:					0px;
-    border-radius:          20px;
-    border-color:           @ac;
-    location:               southwest;
-    x-offset:               25px;
-    y-offset:               -95px;
+    width:      			320px;
+    padding:    			25px;
+    border:					0px 0px 0px 4px;
+    border-radius:          0px;
+    border-color:           @bg3;
+    location:               center;
+    y-offset:               -2em;
 }
 
 entry {
     expand: 				true;
-    text-color:				@ac;
+    text-color:				@bg2;
 }

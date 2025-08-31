@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # tmux-fzf-dashboard.sh
-# Tmux session/window selector with FZF (no predefined sessions, q to abort)
+# Tmux session/window selector with FZF (supports session templates, j/k navigation)
 
 # Detach if inside tmux
 [ -n "$TMUX" ] && tmux detach
@@ -19,11 +19,38 @@ format_session() {
     name=$(echo "$line" | awk '{print $1}')
     ts=$(echo "$line" | grep -oP '\d{10}')
     date_str=$(date -d @"$ts" '+%b %d %Y %H:%M')
-    echo "$name (${line#* } created: $date_str)"
+    # echo "$name (${line#* } created: $date_str)"
+    echo "$name (created: $date_str)"
 }
 
 session_exists() {
     tmux has-session -t "$1" 2>/dev/null
+}
+
+create_template_session() {
+    local session_name="$1"
+    local template="$2"
+
+    case "$template" in
+    dev)
+        tmux new-session -d -s "$session_name" -n "editor"
+        tmux new-window -t "$session_name" -n "server"
+        tmux new-window -t "$session_name" -n "logs"
+        ;;
+    web)
+        tmux new-session -d -s "$session_name" -n "frontend"
+        tmux new-window -t "$session_name" -n "backend"
+        tmux new-window -t "$session_name" -n "database"
+        ;;
+    suma)
+        tmux new-session -d -s "$session_name" -n "nvim"
+        tmux new-window -t "$session_name" -n "xtra"
+        tmux new-window -t "$session_name" -n "btop"
+        ;;
+    *)
+        tmux new-session -d -s "$session_name" -n "main"
+        ;;
+    esac
 }
 
 # -------------------------------
@@ -48,7 +75,7 @@ selected_session=$(echo -e "$sessions" | fzf \
     --border \
     --reverse \
     --bind "j:down,k:up,q:abort" \
-    --preview 'tmux list-windows -t {1} -F "#{window_index}: #{window_name} #{pane_current_command}"' \
+    --preview 'tmux list-windows -t {1} -F "#{window_index}: #{window_name} | #{pane_current_command}"' \
     --cycle)
 
 # Abort if nothing selected
@@ -59,16 +86,55 @@ selected_session=$(echo -e "$sessions" | fzf \
 # -------------------------------
 if [[ "$selected_session" == "[New session]" ]]; then
     read -rp "Enter new session name: " session_name
-    [ -n "$session_name" ] && tmux new-session -s "$session_name"
+    [ -z "$session_name" ] && exit 0
+
+    # Select template
+    template=$(printf "suma\ndev\nweb\ndefault" | fzf \
+        --prompt="Select session template: " \
+        --height=15 \
+        --border \
+        --bind "j:down,k:up,q:abort" \
+        --cycle \
+        --reverse)
+
+    [ -z "$template" ] && template="default"
+
+    # Create session with template
+    create_template_session "$session_name" "$template"
+
+    # Attach immediately
+    tmux attach-session -t "$session_name"
     exit 0
 fi
 
 if [[ "$selected_session" == "[Delete session]" ]]; then
-    del_session=$(tmux list-sessions -F "#{session_name}" | fzf --prompt="Select session to delete (q to quit): " --bind "q:abort")
-    [ -n "$del_session" ] && tmux kill-session -t "$del_session"
+    while true; do
+        del_session=$(tmux list-sessions -F "#{session_name}" | fzf \
+            --prompt="Select session to delete (q to quit): " \
+            --height=12 \
+            --border \
+            --reverse \
+            --bind "j:down,k:up,q:abort")
+
+        # Exit if nothing selected (user pressed q)
+        [ -z "$del_session" ] && break
+
+        # Kill the selected session
+        tmux kill-session -t "$del_session"
+    done
     exit 0
 fi
-
+# if [[ "$selected_session" == "[Delete session]" ]]; then
+#     del_session=$(tmux list-sessions -F "#{session_name}" | fzf \
+#         --prompt="Select session to delete (q to quit): " \
+#         --height=12 \
+#         --border \
+#         --reverse \
+#         --bind "j:down,k:up,q:abort")
+#     [ -n "$del_session" ] && tmux kill-session -t "$del_session"
+#     exit 0
+# fi
+#
 # Strip ANSI codes and extract session name
 session_name=$(echo "$selected_session" | sed 's/\x1b\[[0-9;]*m//g' | awk '{print $1}')
 

@@ -162,8 +162,14 @@ configuration {
     kb-mode-complete: "Control+l";
   case-sensitive: false;
 }
+// main
+// @theme "/home/hellopradeep/.config/rofi/themes/try.rasi"
+
 //@theme "~/.config/rofi/themes/try.rasi"
 /* @theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"*/
 
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
 
-@theme "/home/hellopradeep/.config/rofi/themes/try.rasi"
+// black and white
+// @theme "/home/hellopradeep/.config/rofi/themes/bw.rasi"

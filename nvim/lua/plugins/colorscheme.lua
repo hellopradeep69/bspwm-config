@@ -48,3 +48,27 @@ return {
 --     vim.cmd("colorscheme monochrome")
 --   end,
 -- }
+-- Lua with Lazy.nvim:
+-- return {
+--   "Mofiqul/adwaita.nvim",
+--   lazy = false,
+--   priority = 1000,
+--
+--   -- configure and set on startup
+--   config = function()
+--     vim.g.adwaita_darker = true -- for darker version
+--     vim.g.adwaita_disable_cursorline = true -- to disable cursorline
+--     vim.g.adwaita_transparent = true -- makes the background transparent
+--     vim.cmd("colorscheme adwaita")
+--   end,
+-- }
+---- pywal script
+-- return {
+--   "AlphaTechnolog/pywal.nvim",
+--   name = "pywal",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     vim.cmd("colorscheme pywal")
+--   end,
+-- }

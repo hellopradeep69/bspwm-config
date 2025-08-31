@@ -1,26 +1,35 @@
 #!/usr/bin/env bash
 
 # Color files
-PFILE="$HOME/.config/polybar/pwidgets/colors.ini"
-RFILE="$HOME/.config/polybar/pwidgets/scripts/rofi/colors.rasi"
+PFILE="$HOME/.config/polybar/colorblocks/colors.ini"
+RFILE="$HOME/.config/polybar/colorblocks/scripts/rofi/colors.rasi"
 
 # Change colors
 change_color() {
 	# polybar
-	sed -i -e "s/bg = #.*/bg = ${BG}/g" $PFILE
-	sed -i -e "s/fg = #.*/fg = ${BG}/g" $PFILE
-	sed -i -e "s/fga = #.*/fga = ${RFG}/g" $PFILE
-	sed -i -e "s/ac = #.*/ac = ${AC}/g" $PFILE
+	sed -i -e "s/background = #.*/background = $BG/g" $PFILE
+	sed -i -e "s/foreground = #.*/foreground = $FG/g" $PFILE
+	sed -i -e "s/foreground-alt = #.*/foreground-alt = $FGA/g" $PFILE
+	sed -i -e "s/shade1 = #.*/shade1 = $SH1/g" $PFILE
+	sed -i -e "s/shade2 = #.*/shade2 = $SH2/g" $PFILE
+	sed -i -e "s/shade3 = #.*/shade3 = $SH3/g" $PFILE
+	sed -i -e "s/shade4 = #.*/shade4 = $SH4/g" $PFILE
+	sed -i -e "s/shade5 = #.*/shade5 = $SH5/g" $PFILE
+	sed -i -e "s/shade6 = #.*/shade6 = $SH6/g" $PFILE
+	sed -i -e "s/shade7 = #.*/shade7 = $SH7/g" $PFILE
+	sed -i -e "s/shade8 = #.*/shade8 = $SH8/g" $PFILE
 	
 	# rofi
 	cat > $RFILE <<- EOF
 	/* colors */
 
 	* {
-	  al:   #00000000;
-	  bg:   ${BG}FF;
-	  fg:   ${RFG}FF;
-	  ac:   ${AC}FF;
+	  al:    #00000000;
+	  bg:    #141C21FF;
+	  bg1:   ${SH8}FF;
+	  bg2:   ${SH7}FF;
+	  bg3:   ${SH6}FF;
+	  fg:    #FFFFFFFF;
 	}
 	EOF
 	
@@ -60,8 +69,16 @@ get_random_color() {
 }
 
 # Main
-BG=`get_random_color`
-RFG=`get_random_color`
-AC=`get_random_color`
+BG='#141C21'	# change to light bg
+FG='#141C21'	# change to dark fg
+FGA='#FFFFFF'	# change to gray fg
+SH1=`get_random_color`
+SH2=`get_random_color`
+SH3=`get_random_color`
+SH4=`get_random_color`
+SH5=`get_random_color`
+SH6=`get_random_color`
+SH7=`get_random_color`
+SH8=`get_random_color`
 
 change_color
