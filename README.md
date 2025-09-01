@@ -25,6 +25,15 @@ For the best browsing experience in your bspwm setup, it is **highly recommended
   - **Notifications** → `dunst`
   - **Utilities** → `git`, `curl`, `wget`, `fzf`, `bat`, `neofetch`
 
+### 🔧 Extra Dependencies
+Some configs and scripts may require additional tools not included in the main package list, such as:
+- `playerctl` (for media controls)
+- `xrandr` (for monitor management)
+- `brightnessctl` (for brightness keys)
+- `i3lock` (for screen lock)
+
+Install them via your package manager if features don’t work as expected.
+
 - ⚡ Works on **Arch, Debian/Ubuntu, Fedora, openSUSE** (auto-detects distro).  
 - 🎨 Restores configs for:
   - `bspwm`, `sxhkd`, `polybar`, `picom`, `rofi`
