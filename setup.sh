@@ -124,11 +124,20 @@ if [ -d "$BACKUP_DIR/scripts" ]; then
     cp -r "$BACKUP_DIR/scripts/"* "$LOCAL_BIN"
 fi
 
-# Step 6: Wallpaper -> ~/Pictures
-if [ -f "$BACKUP_DIR/cyper.jpg" ]; then
-    echo "🖼️ Installing wallpaper -> ~/Pictures/cyper.jpg"
-    mkdir -p "$HOME/Pictures"
-    cp "$BACKUP_DIR/cyper.jpg" "$HOME/Pictures/cyper.jpg"
+# Step 6: Wallpapers -> ~/Pictures/Wallpapers
+WALL_DIR="$HOME/Pictures/Wallpapers"
+mkdir -p "$WALL_DIR"
+
+# Copy single "red cyber.jpg" if exists
+if [ -f "$BACKUP_DIR/red cyber.jpg" ]; then
+    echo "🖼️ Installing wallpaper -> $WALL_DIR/red cyber.jpg"
+    cp "$BACKUP_DIR/red cyber.jpg" "$WALL_DIR/"
+fi
+
+# Copy entire Wallpapers/ folder if exists
+if [ -d "$BACKUP_DIR/Wallpapers" ]; then
+    echo "🖼️ Installing Wallpapers -> $WALL_DIR/"
+    cp -r "$BACKUP_DIR/Wallpapers/"* "$WALL_DIR/"
 fi
 
 # Step 7: Desktop shortcuts -> ~/.local/share/applications

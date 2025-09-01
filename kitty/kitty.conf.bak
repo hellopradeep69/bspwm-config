@@ -1,22 +1,33 @@
-cursor_trail 10
-cursor_trail_start_threshold 0
-cursor_trail_decay 0.01 0.05
+
+# Use JetBrainsMono Nerd Font Regular
+font_family      JetBrainsMono Nerd Font
+bold_font        none
+italic_font      none
+bold_italic_font none
+
+# Set font size
+font_size        12
+
+# cursor_trail 10
+# cursor_trail_start_threshold 0
+# cursor_trail_decay 0.01 0.05
 cursor_shape block
-cursor_blink true
-
-
-# Font family
-font_family JetBrainsMono Nerd Font
-
-# Font size
-font_size 12.0
-
-# (Optional) Bold/Italic fallbacks
-bold_font JetBrainsMono Nerd Font Bold
-italic_font JetBrainsMono Nerd Font Italic
-bold_italic_font JetBrainsMono Nerd Font Bold Italic
+cursor_blink false
 
 allow_remote_control yes
+
+
+# Enable ligatures
+enable_ligatures yes
+
+# ======================
+# Window / Decorations
+# ======================
+# Only show border, no title bar
+window_decorations none
+# Window padding
+window_padding_width 4
+background_opacity 1.0
 
 # Font settings
 # font_family      JetBrainsMono Nerd Font
@@ -31,17 +42,13 @@ allow_remote_control yes
 # Clipboard key bindings
 map ctrl+c copy_to_clipboard
 map ctrl+v paste_from_clipboard
-map ctrl+shift+c send_text all \x03  # Send SIGINT
-
-# Theme includes
-#include themes/Tokyonight.conf
-include current-theme.conf
+map ctrl+shift+c send_text all \x03  
 
 tab_bar_edge top
 tab_bar_style powerline
 
 
 # BEGIN_KITTY_THEME
-# Tomorrow Night
+# Gruvbox Dark Hard
 include current-theme.conf
 # END_KITTY_THEME
