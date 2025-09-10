@@ -55,11 +55,6 @@ b) url="https://search.brave.com/search?q=$query" ;;
 w) url="https://en.wikipedia.org/wiki/$query" ;;
 y) url="https://www.youtube.com/results?search_query=$query" ;;
 g) url="https://github.com/search?q=$query" ;;
-x) bspc node -c ;;
-sc) gnome-screenshot ;;
-m) ~/.local/bin/rofipl2.sh ;;
-wifi) ~/.local/bin/rofi-wifi.sh ;;
-f) bspc node -t ~fullscreen ;;
 
 *) notify-send "Unknown input '$prefix'" && exit 1 ;;
 esac
@@ -111,4 +106,4 @@ xdg-open "$url"
 #esac
 #
 ## Open in browser
-#xdg-open "$url"
+#

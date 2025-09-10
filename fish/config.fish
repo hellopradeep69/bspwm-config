@@ -39,4 +39,9 @@ if status is-interactive
 
     # 👉 Alias to exit shell using :q (like in Vim)
     alias :q="exit"
+
+    alias lh="ls -a"
+
 end
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

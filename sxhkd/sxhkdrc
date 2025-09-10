@@ -111,6 +111,8 @@ XF86RFKill
 super + f
     bspc node -t ~fullscreen
 
+alt + Return
+    bspc node -t ~fullscreen
 # Resize window (hold Super + Alt and press Vim keys)
 # expand a window by moving one of its side outward
 super + alt + {h, j, k, l}
@@ -221,3 +223,9 @@ Scroll_Lock
     # xdotool key Escape
 alt + space
     ~/.local/bin/internet.sh
+
+alt + h
+    bspc desktop -f prev
+
+alt + l
+    bspc desktop -f next

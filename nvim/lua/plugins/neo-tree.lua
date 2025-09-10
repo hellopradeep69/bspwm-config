@@ -41,33 +41,33 @@ return {
     },
 
     -- Extra custom mappings
-    { "<leader>t", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
+    -- { "<leader>t", "<cmd>Neotree toggle<cr>", desc = "Toggle Neo-tree" },
     -- { "<leader>r", "<cmd>Neotree filesystem reveal<cr>", desc = "Reveal File in Neo-tree" },
 
-    {
-      "<leader>r",
-      function()
-        require("neo-tree.command").execute({
-          toggle = true, -- toggle open/close
-          dir = vim.loop.cwd(), -- current working directory
-          reveal_file = false, -- do NOT try to reveal the current file
-          position = "left", -- optional: position of the tree
-        })
-      end,
-      desc = "Explorer Neo-tree (cwd only)",
-    },
+    -- {
+    --   "<leader>r",
+    --   function()
+    --     require("neo-tree.command").execute({
+    --       toggle = true, -- toggle open/close
+    --       dir = vim.loop.cwd(), -- current working directory
+    --       reveal_file = false, -- do NOT try to reveal the current file
+    --       position = "left", -- optional: position of the tree
+    --     })
+    --   end,
+    --   desc = "Explorer Neo-tree (cwd only)",
+    -- },
     { "<leader>q", "<cmd>Neotree close<cr>", desc = "Close NeoTree" },
-    {
-      "<leader>o",
-      function()
-        if vim.bo.filetype == "neo-tree" then
-          vim.cmd("wincmd p")
-        else
-          vim.cmd("Neotree reveal")
-        end
-      end,
-      desc = "Toggle focus NeoTree / File",
-    },
+    -- {
+    --   "<leader>o",
+    --   function()
+    --     if vim.bo.filetype == "neo-tree" then
+    --       vim.cmd("wincmd p")
+    --     else
+    --       vim.cmd("Neotree reveal")
+    --     end
+    --   end,
+    --   desc = "Toggle focus NeoTree / File",
+    -- },
   },
   deactivate = function()
     vim.cmd([[Neotree close]])

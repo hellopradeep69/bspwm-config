@@ -2,6 +2,7 @@
 -- This file sets custom Vim options before LazyVim startup.
 -- Default options: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 
+vim.opt.cmdheight = 0
 -- GENERAL SETTINGS
 vim.opt.number = true -- Show line numbers
 vim.opt.relativenumber = true -- Show relative line numbers
@@ -10,6 +11,7 @@ vim.opt.showcmd = true -- Show (partial) command in the last line of the screen
 vim.opt.cursorline = true -- Highlight the current line
 vim.opt.termguicolors = true -- Enable true color support
 vim.opt.mouse = "" -- Disable mouse support
+-- vim.opt.colorcolumn = "80"
 
 -- FILE AND BACKUP SETTINGS
 vim.opt.swapfile = false -- Don't use swap files

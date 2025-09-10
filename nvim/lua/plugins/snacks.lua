@@ -26,6 +26,14 @@ return {
     },
   },
   keys = {
+    -- undo tree toggle
+    {
+      "<leader>iu",
+      function()
+        Snacks.picker.undo()
+      end,
+      desc = "Undotree",
+    },
     -- Top Pickers & Explorer
     {
       "<leader><space>",
@@ -62,13 +70,6 @@ return {
       end,
       desc = "Notification History",
     },
-    -- {
-    --   "<leader>e",
-    --   function()
-    --     Snacks.explorer()
-    --   end,
-    --   desc = "File Explorer",
-    -- },
     -- find
     {
       "<leader>fb",
@@ -163,176 +164,31 @@ return {
       desc = "Git Log File",
     },
     -- Grep
-    {
-      "<leader>sb",
-      function()
-        Snacks.picker.lines()
-      end,
-      desc = "Buffer Lines",
-    },
-    {
-      "<leader>sB",
-      function()
-        Snacks.picker.grep_buffers()
-      end,
-      desc = "Grep Open Buffers",
-    },
-    {
-      "<leader>sg",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep",
-    },
-    {
-      "<leader>sw",
-      function()
-        Snacks.picker.grep_word()
-      end,
-      desc = "Visual selection or word",
-      mode = { "n", "x" },
-    },
-    -- search
-    {
-      '<leader>s"',
-      function()
-        Snacks.picker.registers()
-      end,
-      desc = "Registers",
-    },
-    {
-      "<leader>s/",
-      function()
-        Snacks.picker.search_history()
-      end,
-      desc = "Search History",
-    },
-    {
-      "<leader>sa",
-      function()
-        Snacks.picker.autocmds()
-      end,
-      desc = "Autocmds",
-    },
-    {
-      "<leader>sb",
-      function()
-        Snacks.picker.lines()
-      end,
-      desc = "Buffer Lines",
-    },
-    {
-      "<leader>sc",
-      function()
-        Snacks.picker.command_history()
-      end,
-      desc = "Command History",
-    },
-    {
-      "<leader>sC",
-      function()
-        Snacks.picker.commands()
-      end,
-      desc = "Commands",
-    },
-    {
-      "<leader>sd",
-      function()
-        Snacks.picker.diagnostics()
-      end,
-      desc = "Diagnostics",
-    },
-    {
-      "<leader>sD",
-      function()
-        Snacks.picker.diagnostics_buffer()
-      end,
-      desc = "Buffer Diagnostics",
-    },
-    {
-      "<leader>sh",
-      function()
-        Snacks.picker.help()
-      end,
-      desc = "Help Pages",
-    },
-    {
-      "<leader>sH",
-      function()
-        Snacks.picker.highlights()
-      end,
-      desc = "Highlights",
-    },
-    {
-      "<leader>si",
-      function()
-        Snacks.picker.icons()
-      end,
-      desc = "Icons",
-    },
-    {
-      "<leader>sj",
-      function()
-        Snacks.picker.jumps()
-      end,
-      desc = "Jumps",
-    },
-    {
-      "<leader>sk",
-      function()
-        Snacks.picker.keymaps()
-      end,
-      desc = "Keymaps",
-    },
-    {
-      "<leader>sl",
-      function()
-        Snacks.picker.loclist()
-      end,
-      desc = "Location List",
-    },
-    {
-      "<leader>sm",
-      function()
-        Snacks.picker.marks()
-      end,
-      desc = "Marks",
-    },
-    {
-      "<leader>sM",
-      function()
-        Snacks.picker.man()
-      end,
-      desc = "Man Pages",
-    },
-    {
-      "<leader>sp",
-      function()
-        Snacks.picker.lazy()
-      end,
-      desc = "Search for Plugin Spec",
-    },
-    {
-      "<leader>sq",
-      function()
-        Snacks.picker.qflist()
-      end,
-      desc = "Quickfix List",
-    },
-    {
-      "<leader>sR",
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = "Resume",
-    },
-    {
-      "<leader>su",
-      function()
-        Snacks.picker.undo()
-      end,
-      desc = "Undo History",
-    },
+    { "<leader>sb", false },
+    { "<leader>sB", false },
+    { "<leader>sg", false },
+    { "<leader>sw", false },
+    { '<leader>s"', false },
+    { "<leader>s/", false },
+    { "<leader>sa", false },
+    { "<leader>sb", false },
+    { "<leader>sc", false },
+    { "<leader>sC", false },
+    { "<leader>sd", false },
+    { "<leader>sD", false },
+    { "<leader>sh", false },
+    { "<leader>sH", false },
+    { "<leader>si", false },
+    { "<leader>sj", false },
+    { "<leader>sk", false },
+    { "<leader>sl", false },
+    { "<leader>sm", false },
+    { "<leader>sM", false },
+    { "<leader>sp", false },
+    { "<leader>sq", false },
+    { "<leader>sR", false },
+    { "<leader>su", false },
+    { "<leader>sG", false },
     {
       "<leader>uC",
       function()
@@ -377,20 +233,8 @@ return {
       end,
       desc = "Goto T[y]pe Definition",
     },
-    {
-      "<leader>ss",
-      function()
-        Snacks.picker.lsp_symbols()
-      end,
-      desc = "LSP Symbols",
-    },
-    {
-      "<leader>sS",
-      function()
-        Snacks.picker.lsp_workspace_symbols()
-      end,
-      desc = "LSP Workspace Symbols",
-    },
+    { "<leader>ss", false },
+    { "<leader>sS", false },
     -- Other
     {
       "<leader>z",

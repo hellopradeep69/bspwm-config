@@ -26,6 +26,7 @@ return {
   priority = 1000,
   config = function()
     vim.cmd("colorscheme gruvbox-hard")
+    -- vim.cmd("hi Normal guibg=NONE")
   end,
 }
 -- idk
@@ -70,5 +71,13 @@ return {
 --   priority = 1000,
 --   config = function()
 --     vim.cmd("colorscheme pywal")
+--   end,
+-- }
+-- lua/plugins/rose-pine.lua
+-- return {
+--   "rose-pine/neovim",
+--   name = "rose-pine",
+--   config = function()
+--     vim.cmd("colorscheme rose-pine")
 --   end,
 -- }

@@ -3,6 +3,7 @@ return {
   event = "LazyFile",
   dependencies = {
     "mason.nvim",
+    "saghen/blink.cmp",
     { "mason-org/mason-lspconfig.nvim", config = function() end },
   },
   opts = function()
@@ -85,7 +86,7 @@ return {
               },
               hint = {
                 enable = true,
-                setType = false,
+                setType = true,
                 paramType = true,
                 paramName = "Disable",
                 semicolon = "Disable",
@@ -94,6 +95,10 @@ return {
             },
           },
         },
+        html = {}, -- HTML autocomplete
+        pyright = {}, -- Python
+        clangd = {}, -- C/C++
+        cssls = {}, --  this enables CSS LSP
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig
