@@ -3,9 +3,9 @@ return {
   dependencies = {
     -- You can choose one of the following pickers
     -- "nvim-telescope/telescope.nvim",
-    "ibhagwan/fzf-lua",
+    -- "ibhagwan/fzf-lua",
     --       'echasnovski/mini.pick',
-    -- 'folke/snacks.nvim',
+    "folke/snacks.nvim",
   },
   keys = {
     { "<leader>pp", "<cmd>LivePreview start<cr>", desc = "live preview" },

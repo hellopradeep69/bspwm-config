@@ -1,0 +1,156 @@
+
+{
+  "HTML5 Boilerplate": {
+    "prefix": "aHtml5",
+    "body": [
+      "<!DOCTYPE html>",
+      "<html lang=\"en\">",
+      "<head>",
+      "    <meta charset=\"UTF-8\">",
+      "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">",
+      "    <title>${1:Document}</title>",
+      "<link rel=\"stylesheet\" href=\"css/style.css\">",
+      "</head>",
+      "<body>",
+      "    $0",
+      "</body>",
+      "</html>"
+    ],
+    "description": "Basic HTML5 structure"
+  },
+
+  "Div with class": {
+    "prefix": "divc",
+    "body": [
+      "<div class=\"${1:container}\">",
+      "    $0",
+      "</div>"
+    ],
+    "description": "Div with class"
+  },
+
+  "Anchor Tag": {
+    "prefix": "a",
+    "body": [
+      "<a href=\"${1:https://example.com}\" target=\"${2:_blank}\">${3:Link}</a>"
+    ],
+    "description": "Anchor tag with href and target"
+  },
+
+  "Image Tag": {
+    "prefix": "img",
+    "body": [
+      "<img src=\"${1:image.png}\" alt=\"${2:description}\" width=\"${3:200}\" height=\"${4:200}\">"
+    ],
+    "description": "Image tag with alt, width, and height"
+  },
+
+  "Script Tag": {
+    "prefix": "script",
+    "body": [
+      "<script src=\"${1:script.js}\"></script>"
+    ],
+    "description": "Script tag"
+  },
+
+  "Inline Script": {
+    "prefix": "scriptinline",
+    "body": [
+      "<script>",
+      "    ${0:// JavaScript here}",
+      "</script>"
+    ],
+    "description": "Inline JavaScript script tag"
+  },
+
+  "Link CSS": {
+    "prefix": "css",
+    "body": [
+      "<link rel=\"stylesheet\" href=\"${1:style.css}\">"
+    ],
+    "description": "CSS link tag"
+  },
+
+  "Meta Charset": {
+    "prefix": "meta-charset",
+    "body": [
+      "<meta charset=\"UTF-8\">"
+    ],
+    "description": "Meta charset tag"
+  },
+
+  "Meta Viewport": {
+    "prefix": "meta-viewport",
+    "body": [
+      "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+    ],
+    "description": "Meta viewport tag"
+  },
+
+  "Form": {
+    "prefix": "form",
+    "body": [
+      "<form action=\"${1:/submit}\" method=\"${2:post}\">",
+      "    <label for=\"${3:input}\">${4:Label}</label>",
+      "    <input type=\"${5:text}\" id=\"${3:input}\" name=\"${3:input}\" placeholder=\"${6:Enter here}\">",
+      "    <button type=\"submit\">${7:Submit}</button>",
+      "</form>"
+    ],
+    "description": "Form with label, input, and submit"
+  },
+
+  "Table": {
+    "prefix": "table",
+    "body": [
+      "<table border=\"${1:1}\">",
+      "    <tr>",
+      "        <th>${2:Header 1}</th>",
+      "        <th>${3:Header 2}</th>",
+      "    </tr>",
+      "    <tr>",
+      "        <td>${4:Data 1}</td>",
+      "        <td>${5:Data 2}</td>",
+      "    </tr>",
+      "</table>"
+    ],
+    "description": "Basic table with headers and rows"
+  },
+
+  "List UL": {
+    "prefix": "ul",
+    "body": [
+      "<ul>",
+      "    <li>${1:Item 1}</li>",
+      "    <li>${2:Item 2}</li>",
+      "</ul>"
+    ],
+    "description": "Unordered list"
+  },
+
+  "List OL": {
+    "prefix": "ol",
+    "body": [
+      "<ol>",
+      "    <li>${1:Item 1}</li>",
+      "    <li>${2:Item 2}</li>",
+      "</ol>"
+    ],
+    "description": "Ordered list"
+  },
+
+  "Button": {
+    "prefix": "btn",
+    "body": [
+      "<button type=\"${1:button}\">${2:Click me}</button>"
+    ],
+    "description": "Button element"
+  },
+
+  "Input Field": {
+    "prefix": "input",
+    "body": [
+      "<input type=\"${1:text}\" name=\"${2:field}\" id=\"${2:field}\" placeholder=\"${3:Enter text}\">"
+    ],
+    "description": "Input field"
+  }
+}

@@ -164,10 +164,26 @@ return {
       desc = "Git Log File",
     },
     -- Grep
-    { "<leader>sb", false },
+    {
+      "<leader>sb",
+      function()
+        Snacks.picker.grep_buffers()
+      end,
+      desc = "Grep Open buffers",
+    },
+    {
+      "<leader>sw",
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = "Visual selection or word",
+      mode = { "n", "x" },
+    },
+    -- Grep
+    -- { "<leader>sb", false },
+    -- { "<leader>sw", false },
     { "<leader>sB", false },
     { "<leader>sg", false },
-    { "<leader>sw", false },
     { '<leader>s"', false },
     { "<leader>s/", false },
     { "<leader>sa", false },

@@ -99,6 +99,16 @@ return {
         pyright = {}, -- Python
         clangd = {}, -- C/C++
         cssls = {}, --  this enables CSS LSP
+        emmet_language_server = {
+          filetypes = {
+            "html",
+            "css",
+            "scss",
+            "javascriptreact",
+            "typescriptreact",
+            "vue",
+          },
+        },
       },
       -- you can do any additional lsp server setup here
       -- return true if you don't want this server to be setup with lspconfig

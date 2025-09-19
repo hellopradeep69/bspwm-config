@@ -197,8 +197,8 @@ map("t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" })
 -- windows
 -- Map <leader>o to switch to the next window
 -- vim.keymap.set("n", "<leader>o", "<C-w>w", { noremap = true, silent = true })
-map("n", "<leader>O", "<C-w>W", { noremap = true, silent = true })
-map("n", "<leader>o", "<C-w>w", { desc = "toggle Window",noremap = true, silent = true })
+map("n", "<leader>O", "<C-w>W", { noremap = true, silent = false})
+map("n", "<leader>o", "<C-w>w", { desc = "toggle Window",noremap = true, silent = false})
 map("n", "<leader>-", "<C-W>s", { desc = "Split Window Below", remap = true })
 map("n", "<leader>|", "<C-W>v", { desc = "Split Window Right", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete Window", remap = true })
@@ -225,6 +225,7 @@ if vim.fn.has("nvim-0.11") == 0 then
 end
 -- jj as an escape
 vim.keymap.set("i", "jj", "<Esc>", { desc = "jj to escape insert mode" })
+vim.o.timeoutlen = 300
 
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
@@ -244,6 +245,12 @@ map("v", "<leader>y", '"+y', opts)
 map("v", "J", ":m '>+1<CR>gv=gv", opts)
 map("v", "K", ":m '<-2<CR>gv=gv", opts)
 
+-- Normal mode: <leader>sr opens :%s/
+vim.keymap.set("n", "<leader>r", ":%s/", { desc = "Search and Replace" })
+-- vim.keymap.set("c", "jj", "<Esc>", { desc = "Abort command-line" })
+-- vim.keymap.set("n", "<leader>sr", ":%s///gc<Left><Left>", { desc = "Search and Replace (global)" })
+
 -- map("n", "<leader>dd", function()
 --   Snacks.bufdelete()
 -- end, { desc = "Delete Buffer" })
+--

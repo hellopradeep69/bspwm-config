@@ -1,0 +1,117 @@
+{
+  "Python File": {
+    "prefix": "pyfile",
+    "body": [
+      "#!/usr/bin/env python3",
+      "# -*- coding: utf-8 -*-",
+      "",
+      "def main():",
+      "    $0",
+      "",
+      "if __name__ == \"__main__\":",
+      "    main()"
+    ],
+    "description": "Basic Python file with main() function"
+  },
+
+  "Print": {
+    "prefix": "print",
+    "body": [
+      "print(${1:\"Hello, World!\"})$0"
+    ],
+    "description": "Print statement"
+  },
+
+  "For Loop": {
+    "prefix": "for",
+    "body": [
+      "for ${1:i} in ${2:range(${3:10})}:",
+      "    $0"
+    ],
+    "description": "For loop"
+  },
+
+  "If Statement": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition}:",
+      "    $0"
+    ],
+    "description": "If statement"
+  },
+
+  "If-Else Statement": {
+    "prefix": "ifel",
+    "body": [
+      "if ${1:condition}:",
+      "    ${2:pass}",
+      "else:",
+      "    $0"
+    ],
+    "description": "If-Else statement"
+  },
+
+  "Function": {
+    "prefix": "def",
+    "body": [
+      "def ${1:function_name}(${2:args}):",
+      "    $0"
+    ],
+    "description": "Function definition"
+  },
+
+  "Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName}(${2:object}):",
+      "    def __init__(self, ${3:args}):",
+      "        $0"
+    ],
+    "description": "Class definition with __init__"
+  },
+
+  "Import": {
+    "prefix": "imp",
+    "body": [
+      "import ${1:module}"
+    ],
+    "description": "Import a module"
+  },
+
+  "From Import": {
+    "prefix": "from",
+    "body": [
+      "from ${1:module} import ${2:item}"
+    ],
+    "description": "From import statement"
+  },
+
+  "List Comprehension": {
+    "prefix": "lc",
+    "body": [
+      "${1:result} = [${2:expr} for ${3:item} in ${4:iterable}]$0"
+    ],
+    "description": "List comprehension"
+  },
+
+  "Try Except": {
+    "prefix": "try",
+    "body": [
+      "try:",
+      "    ${0:# code here}",
+      "except ${1:Exception} as ${2:e}:",
+      "    ${3:print(e)}"
+    ],
+    "description": "Try-Except block"
+  },
+
+  "While Loop": {
+    "prefix": "while",
+    "body": [
+      "while ${1:condition}:",
+      "    $0"
+    ],
+    "description": "While loop"
+  }
+}
+

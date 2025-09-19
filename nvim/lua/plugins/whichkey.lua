@@ -3,6 +3,40 @@ return {
   event = "VeryLazy",
   opts_extend = { "spec" },
   opts = {
+    ---@type wk.Win.opts
+    win = {
+      no_overlap = true,
+      -- width = 1,
+      -- height = { min = 4, max = 25 },
+      -- col = 0,
+      -- row = math.huge,
+      -- border = "none",
+      -- padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+      title = true,
+      title_pos = "left",
+      zindex = 1000,
+      bo = {},
+      wo = {
+        winblend = 30, -- value between 0-100 0 for fully opaque and 100 for fully transparent
+      },
+    },
+    layout = {
+      width = { min = 20 }, -- min and max width of the columns
+      spacing = 3, -- spacing between columns
+    },
+    keys = {
+      scroll_down = "<c-d>", -- binding to scroll down inside the popup
+      scroll_up = "<c-u>", -- binding to scroll up inside the popup
+    },
+    plugins = {
+      -- marks = true, -- shows a list of your marks on ' and `
+      -- registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+      marks = false, -- shows a list of your marks on ' and `
+      registers = false, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    },
+    show_help = false, -- show a help message in the command line for using WhichKey
+    show_keys = false, -- show the currently pressed key and its label as a message in the command line
+    icons = { mappings = false },
     preset = "helix",
     defaults = {},
     spec = {
@@ -17,8 +51,8 @@ return {
         { "<leader>gh", group = "hunks" },
         { "<leader>i", group = "undo" },
         { "<leader>q", group = "quit/session" },
-        { "<leader>u", group = "ui", icon = { icon = "󰙵 ", color = "cyan" } },
-        { "<leader>x", group = "diagnostics/quickfix", icon = { icon = "󱖫 ", color = "green" } },
+        { "<leader>u", group = "ui" },
+        { "<leader>x", group = "diagnostics/quickfix" },
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },

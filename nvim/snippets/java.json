@@ -1,0 +1,158 @@
+{
+  "Main Class": {
+    "prefix": "mainclass",
+    "body": [
+      "public class ${1:Main} {",
+      "    public static void main(String[] args) {",
+      "        $0",
+      "    }",
+      "}"
+    ],
+    "description": "Basic Java class with main method"
+  },
+
+  "Full Class with Package and Imports": {
+    "prefix": "jclass",
+    "body": [
+      "package ${1:my.package};",
+      "",
+      "import java.util.*;",
+      "import java.io.*;",
+      "",
+      "public class ${2:Main} {",
+      "    public static void main(String[] args) throws Exception {",
+      "        $0",
+      "    }",
+      "}"
+    ],
+    "description": "Java class with package, imports, and main"
+  },
+
+  "FastIO Setup (BufferedReader + StringTokenizer)": {
+    "prefix": "fastio",
+    "body": [
+      "BufferedReader br = new BufferedReader(new InputStreamReader(System.in));",
+      "StringTokenizer st = new StringTokenizer(br.readLine());",
+      "int n = Integer.parseInt(st.nextToken());",
+      "int m = Integer.parseInt(st.nextToken());",
+      "$0"
+    ],
+    "description": "Fast I/O for competitive programming"
+  },
+
+  "For Loop (index)": {
+    "prefix": "fori",
+    "body": [
+      "for (int ${1:i} = 0; ${1:i} < ${2:n}; ${1:i}++) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Standard for loop with index"
+  },
+
+  "For Each Loop": {
+    "prefix": "foreach",
+    "body": [
+      "for (${1:String} ${2:item} : ${3:collection}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "For-each loop over collection"
+  },
+
+  "Method Definition": {
+    "prefix": "method",
+    "body": [
+      "public ${1:void} ${2:methodName}(${3:int x, int y}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Method definition template"
+  },
+
+  "Generic Static Function": {
+    "prefix": "genfn",
+    "body": [
+      "public static <${1:T}> ${2:void} ${3:funcName}(${4:T arg}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Generic static function template"
+  },
+
+  "Static Method": {
+    "prefix": "stmethod",
+    "body": [
+      "public static ${1:void} ${2:methodName}(${3}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Static method definition"
+  },
+
+  "Class Definition": {
+    "prefix": "class",
+    "body": [
+      "public class ${1:ClassName} {",
+      "    $0",
+      "}"
+    ],
+    "description": "Class definition boilerplate"
+  },
+
+  "Try-Catch": {
+    "prefix": "tryc",
+    "body": [
+      "try {",
+      "    $0",
+      "} catch (${1:Exception} e) {",
+      "    e.printStackTrace();",
+      "}"
+    ],
+    "description": "Try-catch block"
+  },
+
+  "Try-With-Resources": {
+    "prefix": "tryr",
+    "body": [
+      "try (${1:BufferedReader} ${2:br} = new ${1:BufferedReader}(${3:new InputStreamReader(System.in)})) {",
+      "    $0",
+      "} catch (${4:Exception} e) {",
+      "    e.printStackTrace();",
+      "}"
+    ],
+    "description": "Try-with-resources block"
+  },
+
+  "Println": {
+    "prefix": "sout",
+    "body": [
+      "System.out.println(${1});"
+    ],
+    "description": "Shortcut for System.out.println"
+  },
+
+  "Debug Print": {
+    "prefix": "log",
+    "body": [
+      "System.out.println(\"${1:DEBUG}: \" + ${2:variable});"
+    ],
+    "description": "Debug log with variable"
+  },
+
+  "Scanner Setup": {
+    "prefix": "scanner",
+    "body": [
+      "Scanner sc = new Scanner(System.in);"
+    ],
+    "description": "Scanner input setup"
+  },
+
+  "ArrayList": {
+    "prefix": "arraylist",
+    "body": [
+      "ArrayList<${1:String}> ${2:list} = new ArrayList<>();"
+    ],
+    "description": "ArrayList declaration"
+  }
+}
