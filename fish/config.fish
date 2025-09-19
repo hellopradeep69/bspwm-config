@@ -1,5 +1,18 @@
 if status is-interactive
 
+    function cd:
+        # Use the first argument as starting directory, or "." if none
+        set start_dir (or $argv[1] .)
+
+        # Find directories and fuzzy select one with fzf
+        set dir (find $start_dir -type d 2>/dev/null | fzf --bind=j:down,k:up,q:abort --preview "ls --color=always {}")
+
+        # If a directory was chosen, cd into it
+        if test -n "$dir"
+            cd "$dir"
+        end
+    end
+
     # fzf change setting
     # set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,ctrl-j:page-down,ctrl-k:page-up,q:abort '
 

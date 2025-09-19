@@ -73,7 +73,7 @@ save_playlist() {
 load_playlist() {
     selected=$(find "$PLAYLIST_DIR" -type f -name "*.m3u" |
         xargs -I{} basename "{}" .m3u |
-        rofi -dmenu -theme "$THEME" -p "📂 Load Playlist:")
+        rofi -dmenu -theme "$THEME" -p "📂 Load Playlist")
     [ -z "$selected" ] && return
     mapfile -t playlist <"$PLAYLIST_DIR/$selected.m3u"
     rm -f "$SOCKET"
@@ -85,7 +85,7 @@ load_playlist() {
 append_to_playlist() {
     selected_playlist=$(find "$PLAYLIST_DIR" -type f -name "*.m3u" |
         xargs -I{} basename "{}" .m3u |
-        rofi -dmenu -theme "$THEME" -p "📋 Choose Playlist to Append:")
+        rofi -dmenu -theme "$THEME" -p "📋 Choose Playlist to Append")
     [ -z "$selected_playlist" ] && return
     selected_tracks=$(select_tracks)
     [ -z "$selected_tracks" ] && return
@@ -97,7 +97,7 @@ shuffle_playlist() {
     # Select playlist
     selected=$(find "$PLAYLIST_DIR" -type f -name "*.m3u" |
         xargs -I{} basename "{}" .m3u |
-        rofi -dmenu -theme "$THEME" -p "🎲 Select Playlist to Shuffle:")
+        rofi -dmenu -theme "$THEME" -p "🎲 Select Playlist to Shuffle")
     [ -z "$selected" ] && return
 
     input_file="$PLAYLIST_DIR/$selected.m3u"
@@ -119,7 +119,7 @@ shuffle_playlist() {
 playlist_menu() {
     # choice=$(printf "💾 Save Playlist\n📂 Load Playlist\n📋 Append to Playlist" |
     choice=$(printf "📂 Load Playlist\n💾 Save Playlist\n📋 Append to Playlist\n🎲 Shuffle Playlist" |
-        rofi -dmenu -theme "$THEME" -p "🎼 Playlist Menu:")
+        rofi -dmenu -theme "$THEME" -p "🎼 Playlist Menu")
     case "$choice" in
     "💾 Save Playlist") save_playlist ;;
     "📂 Load Playlist") load_playlist ;;
@@ -145,7 +145,7 @@ view_queue() {
 
     mapfile -t queue_array <<<"$queue"
 
-    menu=$(printf "%s\n" "${queue_array[@]}" | rofi -dmenu -theme "$THEME" -p "🎶 Select Track to Play:")
+    menu=$(printf "%s\n" "${queue_array[@]}" | rofi -dmenu -theme "$THEME" -p "🎶 Select Track to Play")
     [ -z "$menu" ] && return
 
     # Extract index from numbered list
@@ -178,7 +178,7 @@ enqueue() {
 queue_menu() {
     while true; do
         choice=$(printf "📜 View Queue\n➕ Enqueue\n ⬅️ Back" |
-            rofi -dmenu -theme "$THEME" -p "📜 Queue Menu:")
+            rofi -dmenu -theme "$THEME" -p "📜 Queue Menu")
         case "$choice" in
         "📜 View Queue") view_queue ;;
         "➕ Enqueue") enqueue ;;
@@ -192,7 +192,7 @@ controls_menu() {
     mpv_running || return
     while true; do
         action=$(printf "⏸️ Pause/Resume\n⏭️ Next\n⏮️ Prev\n⏪ Back 10s\n⏩ Forward 10s\n🔁 Toggle Loop\n⏹️ Quit\n⬅️ Back" |
-            rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎛️ Controls:")
+            rofi -dmenu -matching fuzzy -i -theme "$THEME" -p "🎛️ Controls")
         case "$action" in
         "⏸️ Pause/Resume") echo '{ "command": ["cycle", "pause"] }' | socat - "$SOCKET" ;;
         "⏭️ Next") echo '{ "command": ["playlist-next"] }' | socat - "$SOCKET" ;;

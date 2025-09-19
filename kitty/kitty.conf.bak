@@ -16,7 +16,6 @@ cursor_blink false
 
 allow_remote_control yes
 
-
 # Enable ligatures
 enable_ligatures yes
 
@@ -26,18 +25,8 @@ enable_ligatures yes
 # Only show border, no title bar
 window_decorations none
 # Window padding
-window_padding_width 4
+window_padding_width 8
 background_opacity 1.0
-
-# Font settings
-# font_family      JetBrainsMono Nerd Font
-# bold_font        JetBrainsMono Nerd Font Bold
-# italic_font      JetBrainsMono Nerd Font Italic
-# bold_italic_font JetBrainsMono Nerd Font Bold Italic
-# font_size        12.0
-#
-# Opacity
-# background_opacity 0.80
 
 # Clipboard key bindings
 map ctrl+c copy_to_clipboard
@@ -49,6 +38,6 @@ tab_bar_style powerline
 
 
 # BEGIN_KITTY_THEME
-# Gruvbox Dark Hard
+# Gruvbox Material Dark Hard
 include current-theme.conf
 # END_KITTY_THEME

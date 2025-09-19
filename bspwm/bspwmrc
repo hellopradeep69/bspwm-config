@@ -29,6 +29,11 @@ picom &
 # Cursor fix (optional)
 xsetroot -cursor_name left_ptr
 
+bspc rule -a Screenkey state=floating sticky=on border=off layer=above
+# Launch Zen Browser on desktop 9
+bspc rule -a zenbrowser desktop=^9 follow=off state=floating
+zen-browser --new-instance --new-window about:blank &
+
 # Custom scripts
 # ~/.local/bin/capslock-notify.sh
 # ~/.local/bin/dunstsound.sh &
@@ -67,6 +72,7 @@ bspc config pointer_follows_focus false
 
 # Set default desktop layout
 bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+# bspc monitor -d 1 2 3 4 5 0
 
 # Reverse touchpad scrolling
 xinput set-prop "SYNA7DB5:00 06CB:CD41 Touchpad" "libinput Natural Scrolling Enabled" 1

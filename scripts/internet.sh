@@ -23,6 +23,17 @@ declare -A ws_map=(
     ["eight"]=8
     ["nine"]=9
     ["zero"]=0
+    ["on"]=1
+    ["tw"]=2
+    ["th"]=3
+    ["fo"]=4
+    ["fi"]=5
+    ["si"]=6
+    ["se"]=7
+    ["ei"]=8
+    ["ni"]=9
+    ["ze"]=0
+
 )
 
 # ==============================
@@ -55,6 +66,7 @@ b) url="https://search.brave.com/search?q=$query" ;;
 w) url="https://en.wikipedia.org/wiki/$query" ;;
 y) url="https://www.youtube.com/results?search_query=$query" ;;
 g) url="https://github.com/search?q=$query" ;;
+go) .local/bin/workspace.sh ;;
 x) bspc node -c ;;
 sc) gnome-screenshot ;;
 m) ~/.local/bin/rofipl2.sh ;;

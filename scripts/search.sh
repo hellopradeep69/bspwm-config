@@ -52,7 +52,9 @@ c) url="https://chat.openai.com/?q=$query" ;;
 r) url="https://reddit.com/r/$query" ;;
 d) url="https://duckduckgo.com/?q=$query" ;;
 b) url="https://search.brave.com/search?q=$query" ;;
-w) url="https://en.wikipedia.org/wiki/$query" ;;
+# w) url="https://en.wikipedia.org/wiki/$query" ;;
+w) .local/bin/workspace.sh ;;
+
 y) url="https://www.youtube.com/results?search_query=$query" ;;
 g) url="https://github.com/search?q=$query" ;;
 
