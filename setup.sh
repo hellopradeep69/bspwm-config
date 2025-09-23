@@ -21,6 +21,8 @@ PACKAGES=(
     starship
     neovim
     nitrogen
+    btop
+    lxappearance
     feh
     dunst
     git
