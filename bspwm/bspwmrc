@@ -31,8 +31,8 @@ xsetroot -cursor_name left_ptr
 
 bspc rule -a Screenkey state=floating sticky=on border=off layer=above
 # Launch Zen Browser on desktop 9
-bspc rule -a zenbrowser desktop=^9 follow=off state=floating
-zen-browser --new-instance --new-window about:blank &
+# bspc rule -a zenbrowser desktop=^9 follow=off state=floating
+# zen-browser --new-instance --new-window about:blank &
 
 # Custom scripts
 # ~/.local/bin/capslock-notify.sh

@@ -32,14 +32,6 @@ create_template_session() {
     local template="$2"
 
     case "$template" in
-    suma)
-        tmux new-session -d -s "$session_name" -n "nvim"
-        tmux new-window -t "$session_name" -n "xtra"
-        tmux split-window -h -t "$session_name:2" -c "#{pane_current_path}"
-        tmux resize-pane -t "$session_name:2.0" -Z
-        tmux new-window -t "$session_name" -n "btop"
-        tmux select-window -t "$session_name:1"
-        ;;
     project)
         tmux new-session -d -s "$session_name" -n "nvim"
         tmux new-window -t "$session_name" -n "html"
@@ -132,9 +124,8 @@ if [[ "$selected_session" == "[New session]" ]]; then
     session_name=$(
         echo "" | fzf \
             --print-query \
-            --prompt="Enter new session name(q to quit): " \
-            --border --reverse \
-            --bind "q:abort"
+            --prompt="Enter new session name: " \
+            --border --reverse
     )
     session_name=$(echo "$session_name" | head -n1) # take query part
 
@@ -142,7 +133,7 @@ if [[ "$selected_session" == "[New session]" ]]; then
 
     # Select template
     template=$(
-        printf "suma\nproject\ndev\nweb\ndefault" | fzf \
+        printf "project\ndev\nweb\ndefault" | fzf \
             --prompt="Select session template: " \
             --border --reverse --bind "j:down,k:up,q:abort" --cycle
     )
@@ -197,26 +188,26 @@ session_name=$(echo "$selected_session" | sed 's/\x1b\[[0-9;]*m//g' | awk '{prin
 # SELECT WINDOW
 # -------------------------------
 # comment it out if not need window OPTIONS
-# windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
-# if [ -z "$windows" ]; then
-#     echo "No windows in session $session_name. Creating one..."
-#     tmux new-window -t "$session_name" -n "main"
-#     windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
-# fi
-#
-# selected_window=$(
-#     echo "$windows" | fzf \
-#         --prompt="Select window (q to quit): " \
-#         \
-#         --border \
-#         --reverse \
-#         --bind "j:down,k:up,q:abort" # --height=12 \
-# )
-#
-# # Abort if nothing selected
-# [ -z "$selected_window" ] && exit 0
-#
-# window_index=$(echo "$selected_window" | cut -d':' -f1)
+windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
+if [ -z "$windows" ]; then
+    echo "No windows in session $session_name. Creating one..."
+    tmux new-window -t "$session_name" -n "main"
+    windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
+fi
+
+selected_window=$(
+    echo "$windows" | fzf \
+        --prompt="Select window (q to quit): " \
+        \
+        --border \
+        --reverse \
+        --bind "j:down,k:up,q:abort" # --height=12 \
+)
+
+# Abort if nothing selected
+[ -z "$selected_window" ] && exit 0
+
+window_index=$(echo "$selected_window" | cut -d':' -f1)
 # ----------------- till here
 
 # -------------------------------

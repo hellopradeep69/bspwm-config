@@ -50,11 +50,10 @@ install_packages() {
     echo "==> Detected distro: $distro"
     case "$distro" in
     arch | manjaro | endeavouros)
-        sudo pacman -S --needed --noconfirm "${PACKAGES[@]}"
+        sudo pacman -Syu --needed --noconfirm "${PACKAGES[@]}"
         ;;
     debian | ubuntu | linuxmint)
-        sudo apt update
-        sudo apt install -y "${PACKAGES[@]}"
+        sudo apt update && sudo apt install -y "${PACKAGES[@]}"
         ;;
     fedora)
         sudo dnf install -y "${PACKAGES[@]}"

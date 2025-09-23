@@ -1,3 +1,4 @@
+
 #!/usr/bin/env bash
 # tmux-fzf-dashboard.sh
 # Tmux session/window selector with FZF (supports session templates, j/k navigation)
@@ -32,17 +33,9 @@ create_template_session() {
     local template="$2"
 
     case "$template" in
-    suma)
-        tmux new-session -d -s "$session_name" -n "nvim"
-        tmux new-window -t "$session_name" -n "xtra"
-        tmux split-window -h -t "$session_name:2" -c "#{pane_current_path}"
-        tmux resize-pane -t "$session_name:2.0" -Z
-        tmux new-window -t "$session_name" -n "btop"
-        tmux select-window -t "$session_name:1"
-        ;;
     project)
-        tmux new-session -d -s "$session_name" -n "nvim"
-        tmux new-window -t "$session_name" -n "html"
+        tmux new-session -d -s "$session_name" -n "nvim" -c "$HOME/Project/"
+        tmux new-window -t "$session_name" -n "html" -c "$HOME/Project/html/"
         tmux new-window -t "$session_name" -n "logs"
         tmux select-window -t "$session_name:1"
         ;;
@@ -55,6 +48,14 @@ create_template_session() {
         tmux new-session -d -s "$session_name" -n "frontend"
         tmux new-window -t "$session_name" -n "backend"
         tmux new-window -t "$session_name" -n "database"
+        ;;
+    suma)
+        tmux new-session -d -s "$session_name" -n "nvim"
+        tmux new-window -t "$session_name" -n "xtra"
+        tmux split-window -h -t "$session_name:2" -c "#{pane_current_path}"
+        tmux resize-pane -t "$session_name:2.0" -Z
+        tmux new-window -t "$session_name" -n "btop"
+        tmux select-window -t "$session_name:1"
         ;;
     *)
         tmux new-session -d -s "$session_name" -n "main"
@@ -73,6 +74,7 @@ if [ -n "$existing" ]; then
     done <<<"$existing"
 fi
 
+# sessions+=$'\n'"[New session]"$'\n'"[Delete session]"
 sessions+=$'\n'"[New session]"$'\n'"[Delete session]"$'\n'"[Session from Directory]"
 
 # -------------------------------
@@ -80,6 +82,7 @@ sessions+=$'\n'"[New session]"$'\n'"[Delete session]"$'\n'"[Session from Directo
 # -------------------------------
 # --height=15 \
 selected_session=$(echo -e "$sessions" | fzf \
+    -i \
     --prompt="Select tmux session (q to quit): " \
     --border \
     --reverse \
@@ -132,9 +135,8 @@ if [[ "$selected_session" == "[New session]" ]]; then
     session_name=$(
         echo "" | fzf \
             --print-query \
-            --prompt="Enter new session name(q to quit): " \
-            --border --reverse \
-            --bind "q:abort"
+            --prompt="Enter new session name: " \
+            --border --reverse
     )
     session_name=$(echo "$session_name" | head -n1) # take query part
 
@@ -190,13 +192,41 @@ if [[ "$selected_session" == "[Delete session]" ]]; then
     exit 0
 fi
 
+# if [[ "$selected_session" == "[Delete session]" ]]; then
+#     while true; do
+#         del_session=$(tmux list-sessions -F "#{session_name}" | fzf \
+#             --prompt="Select session to delete (q to quit): " \
+#             --height=12 \
+#             --border \
+#             --reverse \
+#             --bind "j:down,k:up,q:abort")
+#
+#         # Exit if nothing selected (user pressed q)
+#         [ -z "$del_session" ] && break
+#
+#         # Kill the selected session
+#         tmux kill-session -t "$del_session"
+#     done
+#     exit 0
+# fi
+# if [[ "$selected_session" == "[Delete session]" ]]; then
+#     del_session=$(tmux list-sessions -F "#{session_name}" | fzf \
+#         --prompt="Select session to delete (q to quit): " \
+#         --height=12 \
+#         --border \
+#         --reverse \
+#         --bind "j:down,k:up,q:abort")
+#     [ -n "$del_session" ] && tmux kill-session -t "$del_session"
+#     exit 0
+# fi
+#
 # Strip ANSI codes and extract session name
 session_name=$(echo "$selected_session" | sed 's/\x1b\[[0-9;]*m//g' | awk '{print $1}')
 
 # -------------------------------
 # SELECT WINDOW
 # -------------------------------
-# comment it out if not need window OPTIONS
+# comment out if you dont want to select window
 # windows=$(tmux list-windows -t "$session_name" -F "#{window_index}: #{window_name}")
 # if [ -z "$windows" ]; then
 #     echo "No windows in session $session_name. Creating one..."
@@ -217,7 +247,7 @@ session_name=$(echo "$selected_session" | sed 's/\x1b\[[0-9;]*m//g' | awk '{prin
 # [ -z "$selected_window" ] && exit 0
 #
 # window_index=$(echo "$selected_window" | cut -d':' -f1)
-# ----------------- till here
+# ---------------------
 
 # -------------------------------
 # ATTACH TO SELECTED
