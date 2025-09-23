@@ -42,6 +42,15 @@ return {
     spec = {
       {
         mode = { "n", "v" },
+        -- { "<leader>H", "<cmd>Grapple toggle<cr>", hidden = true },
+        -- { "<leader>h", "<cmd>Grapple toggle_tags<cr>", hidden = true },
+        { "<leader>/", function() Snacks.picker.grep() end , hidden = true},
+        { "<leader><space>", function() Snacks.picker.smart() end, hidden = true },
+        { "<leader>,", function() Snacks.picker.buffers() end, hidden = true },
+        { "<leader><space>", function() Snacks.picker.smart() end, hidden = true },
+        { "<leader>:", function() Snacks.picker.command_history() end, hidden = true },
+        { "<leader>.",  function() Snacks.scratch() end, hidden = true },
+        { "<leader>p", group = "preview" },
         { "<leader><tab>", group = "tabs" },
         { "<leader>c", group = "code" },
         { "<leader>d", group = "debug" },

@@ -181,8 +181,9 @@ super + shift + x
     
 # open kew as a scratchpad     
 super + m
-    bspc rule -a Kew state=floating sticky=on center=on rectangle=800x500+0+0 && \
-    kitty --class Kew -e kew
+    ~/.local/bin/tmenu
+    # bspc rule -a Kew state=floating sticky=on center=on rectangle=800x500+0+0 && \
+    # kitty --class Kew -e kew
 
 #open notes rofi menu
 super + n

@@ -112,6 +112,61 @@
       "    $0"
     ],
     "description": "While loop"
+  },
+
+  "Manim Import": {
+    "prefix": "manimimport",
+    "body": [
+      "from manim import *"
+    ],
+    "description": "Import Manim"
+  },
+
+  "Scene Template": {
+    "prefix": "manscene",
+    "body": [
+      "class ${1:MyScene}(Scene):",
+      "    def construct(self):",
+      "        ${0}"
+    ],
+    "description": "Basic Manim Scene"
+  },
+
+  "Text Example": {
+    "prefix": "mantext",
+    "body": [
+      "text = Text(\"${1:Hello, Manim!}\")",
+      "self.play(Write(text))",
+      "self.wait(${2:1})"
+    ],
+    "description": "Add and animate text"
+  },
+
+  "Circle Example": {
+    "prefix": "mancircle",
+    "body": [
+      "circle = Circle(radius=${1:1}, color=${2:BLUE})",
+      "self.play(Create(circle))",
+      "self.wait(${3:1})"
+    ],
+    "description": "Draw a circle"
+  },
+
+  "Square Example": {
+    "prefix": "mansquare",
+    "body": [
+      "square = Square(side_length=${1:2}, color=${2:RED})",
+      "self.play(Create(square))",
+      "self.wait(${3:1})"
+    ],
+    "description": "Draw a square"
+  },
+
+  "Animate Transform": {
+    "prefix": "mantransform",
+    "body": [
+      "self.play(Transform(${1:obj1}, ${2:obj2}))"
+    ],
+    "description": "Transform one object into another"
   }
 }
-

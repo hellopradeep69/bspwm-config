@@ -34,6 +34,15 @@ if status is-interactive
             --preview "batcat --style=numbers --color=always {}"
     end
 
+    # run command tmenu when not in tmux
+    if status is-interactive
+        if not set -q TMUX
+            if type -q tmenu
+                ~/.local/bin/tmenu
+            end
+        end
+    end
+
     # Initialize Starship prompt
     starship init fish | source
 

@@ -81,3 +81,27 @@ return {
 --     vim.cmd("colorscheme rose-pine")
 --   end,
 -- }
+--
+-- in transparent gruvox
+--
+-- return {
+-- 	"https://gitlab.com/motaz-shokry/gruvbox.nvim",
+-- 	name = "gruvbox",
+-- 	priority = 1000, -- load before all other plugins
+-- 	config = function()
+-- 		-- Set colorscheme
+-- 		vim.cmd.colorscheme("gruvbox-hard")
+--
+-- 		-- Transparent background
+-- 		vim.cmd([[
+--       hi Normal guibg=NONE ctermbg=NONE
+--       hi NormalNC guibg=NONE ctermbg=NONE
+--       hi SignColumn guibg=NONE ctermbg=NONE
+--       hi LineNr guibg=NONE ctermbg=NONE
+--       hi EndOfBuffer guibg=NONE ctermbg=NONE
+--       hi NormalFloat guibg=NONE
+--       hi FloatBorder guibg=NONE
+--       hi Pmenu guibg=NONE
+--     ]])
+-- 	end,
+-- }
