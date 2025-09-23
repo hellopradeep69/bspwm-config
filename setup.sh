@@ -10,6 +10,7 @@ BACKUP_DEST="$HOME/config_backup/$(date +%Y-%m-%d_%H-%M-%S)"
 PACKAGES=(
     bspwm
     sxhkd
+    cmake
     polybar
     picom
     rofi
@@ -29,6 +30,7 @@ PACKAGES=(
     curl
     wget
     fzf
+    tmux
     bat
     neofetch
 )
