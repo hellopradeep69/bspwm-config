@@ -35,11 +35,9 @@ if status is-interactive
     end
 
     # run command tmenu when not in tmux
-    if status is-interactive
-        if not set -q TMUX
-            if type -q tmenu
-                ~/.local/bin/tmenu
-            end
+    if not set -q TMUX
+        if type -q tmenu
+            ~/.local/bin/tmenu
         end
     end
 

@@ -33,31 +33,29 @@ create_template_session() {
 
     case "$template" in
     suma)
-        tmux new-session -d -s "$session_name" -n "nvim"
-        tmux new-window -t "$session_name" -n "xtra"
-        tmux split-window -h -t "$session_name:2" -c "#{pane_current_path}"
-        tmux resize-pane -t "$session_name:2.0" -Z
-        tmux new-window -t "$session_name" -n "btop"
+        tmux new-session -d -s "$session_name" -c "$PWD" -n "nvim"
+        tmux new-window -t "$session_name" -c "$HOME" -n "xtra"
+        tmux new-window -t "$session_name" -c "$HOME" -n "btop"
         tmux select-window -t "$session_name:1"
         ;;
     project)
-        tmux new-session -d -s "$session_name" -n "nvim"
-        tmux new-window -t "$session_name" -n "html"
-        tmux new-window -t "$session_name" -n "logs"
+        tmux new-session -d -s "$session_name" -c "$HOME" -n "nvim"
+        tmux new-window -t "$session_name" -c "$HOME" -n "html"
+        tmux new-window -t "$session_name" -c "$HOME" -n "logs"
         tmux select-window -t "$session_name:1"
         ;;
     dev)
-        tmux new-session -d -s "$session_name" -n "editor"
-        tmux new-window -t "$session_name" -n "server"
-        tmux new-window -t "$session_name" -n "logs"
+        tmux new-session -d -s "$session_name" -c "$HOME" -n "editor"
+        tmux new-window -t "$session_name" -c "$HOME" -n "server"
+        tmux new-window -t "$session_name" -c "$HOME" -n "logs"
         ;;
     web)
-        tmux new-session -d -s "$session_name" -n "frontend"
-        tmux new-window -t "$session_name" -n "backend"
-        tmux new-window -t "$session_name" -n "database"
+        tmux new-session -d -s "$session_name" -c "$HOME" -n "frontend"
+        tmux new-window -t "$session_name" -c "$HOME" -n "backend"
+        tmux new-window -t "$session_name" -c "$HOME" -n "database"
         ;;
     *)
-        tmux new-session -d -s "$session_name" -n "main"
+        tmux new-session -d -s "$session_name" -c "$HOME" -n "main"
         ;;
     esac
 }
@@ -112,7 +110,10 @@ if [[ "$selected_session" == "[Session from Directory]" ]]; then
 
     [ -z "$dir" ] && exit 0
 
-    session_name=$(basename "$dir" | tr . _ | tr -cd '[:alnum:]_')
+    # session_name=$(basename "$dir" | tr . _ | tr -cd '[:alnum:]_')
+
+    rel_path=$(realpath --relative-to="$HOME" "$dir" | sed 's|^\.\?||')
+    session_name=$(echo "$rel_path" | tr / _ | tr -cd '[:alnum:]_')
 
     # If session already exists, attach. Else create.
     if session_exists "$session_name"; then

@@ -293,6 +293,12 @@ chmod +x ~/.config/bspwm/bspwmrc
 chmod +x ~/.config/polybar/launch.sh --colorblocks
 ```
 
+---
+
+### Packages ( if script fail to install )
+
+---
+
 ## this script will :
 
 - **Detect your distro.**
