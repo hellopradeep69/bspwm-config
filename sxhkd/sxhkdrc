@@ -2,23 +2,18 @@
 super + Return
     wezterm
 
-#open wez term
-# super + w
-    # /home/hellopradeep/Apps/wezterm/wezterm	
+# open kitty terminal
 super + w
     kitty
     
-#open cool terminal
+# pkill rofi menu
 Pause
     ~/.local/bin/rofi-pkill.sh
 
-# YouTube App
-super + y
-  brave-browser --app="https://www.youtube.com/"
-
-# Brave browser
+# browser
 super + b
-  zen
+  /home/hellopradeep/.local/opt/zen-browser/zen
+  # zen
   # firefox
 
 # Brave browser
@@ -89,6 +84,7 @@ shift + Print
 XF86MonBrightnessUp
   ~/.local/bin/brightness-notify2.sh +5%
   # ~/.local/bin/brightness-notify.sh +5%
+  
 XF86MonBrightnessDown
   ~/.local/bin/brightness-notify2.sh 5%-
   # ~/.local/bin/brightness-notify.sh 5%-
@@ -113,12 +109,11 @@ super + f
 
 alt + Return
     bspc node -t ~fullscreen
-# Resize window (hold Super + Alt and press Vim keys)
+
 # expand a window by moving one of its side outward
 super + alt + {h, j, k, l}
     bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
-# Resize window (hold Super and press arrows)
 # expand a window by moving one of its side outward
 super + alt + {Left, Down, Up, Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -144,31 +139,9 @@ super + shift + z
 super + p
     polybar-msg cmd toggle
 
-#super + f
-#    bspc node -t {tiled && polybar-msg cmd show,pseudo_tiled,fullscreen && polybar-msg cmd hide}
-
-#open notes app
-super + o
-    ~/Apps/Obsidian/Obsidian.AppImage
-
 # super + s
 #     bspc rule -a ScratchPad sticky=on state=floating rectangle=800x600+200+150 && \
 #     kitty --class ScratchPad -e nvim ~/scratchpad.md
-
-#open termina as a note thing using kitty
-# super + s
-    # bspc rule -a ScratchPad sticky=on state=floating center=true rectangle=800x500+0+0 && \
-    # kitty --class ScratchPad -e nvim ~/scratchpad.md 
-
-#open file manger as sctrachpad capture a whole window no fit
-#super + r
-#    bspc rule -a Ranger sticky=on state=floating center=on && \
-#    kitty --class Ranger -e ranger
-
-#open a rnager scrratch pad in kitty
-# super + space
-    # bspc rule -a Ranger state=floating sticky=on center=on rectangle=800x500+0+0 && \
-    # kitty --class Ranger -e ranger
 
 # Hide focused window
 super + x
@@ -178,12 +151,6 @@ super + x
 # Unhide the last hidden window
 super + shift + x
     ~/.local/bin/unhide_last.sh
-    
-# open kew as a scratchpad     
-super + m
-    ~/.local/bin/tmenu
-    # bspc rule -a Kew state=floating sticky=on center=on rectangle=800x500+0+0 && \
-    # kitty --class Kew -e kew
 
 #open notes rofi menu
 super + n
@@ -193,7 +160,7 @@ super + n
 super + a
     ~/.local/bin/rofipl2.sh
 
-#open clipboard using menu
+#open clipboard using menu beside alt gr is menu button
 Menu 
     ~/.local/bin/rofi-clipboard 
 
@@ -218,10 +185,8 @@ super + s
 # toggle between keyboard
 Scroll_Lock
     ~/.local/bin/toggle_keyboard_layout.sh
-# 
-# alt + e as escape (dosnt work) 
-# Alt_L + e
-    # xdotool key Escape
+    
+# xdotool key Escape
 alt + space
     ~/.local/bin/internet.sh
 

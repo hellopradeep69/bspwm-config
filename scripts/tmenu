@@ -99,10 +99,14 @@ if [[ "$selected_session" == "[Session from Directory]" ]]; then
     if command -v fd >/dev/null 2>&1; then
         dir=$(fd . ~/ --type d --follow --exclude .git --max-depth 1 | fzf \
             --prompt="Select directory: " \
+            --preview 'ls --color=always {}' \
+            --preview-window=right:30%:wrap \
             --border --reverse --bind "j:down,k:up,q:abort")
     else
         dir=$(find ~ -mindepth 1 -maxdepth 3 -type d -not -path '*/\.git*' 2>/dev/null | fzf \
             --prompt="Select directory: " \
+            --preview 'ls --color=always {}' \
+            --preview-window=right:30%:wrap \
             --border --reverse --bind "j:down,k:up,q:abort")
     fi
 
@@ -180,7 +184,9 @@ if [[ "$selected_session" == "[Delete session]" ]]; then
 
         # Confirm deletion
         read -rp "Are you sure you want to delete session '$del_session_name'? [y/N]: " confirm
-        if [[ -z "$confirm" || "$confirm" =~ ^[Yyo]$ ]]; then
+        # if [[ -z "$confirm" || "$confirm" =~ ^[Yyo]$ ]]; then
+        confirm=${confirm,,} # convert to lowercase
+        if [[ "$confirm" == "y" ]]; then
             tmux kill-session -t "$del_session_name"
             echo "Session '$del_session_name' deleted."
         else

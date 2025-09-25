@@ -29,6 +29,8 @@
     { "type": "terminal", "keyColor": "red", "valueColor": "red" },
     { "type": "cpu",      "keyColor": "red", "valueColor": "red" },
     { "type": "gpu",      "keyColor": "red", "valueColor": "red" },
+    { "type": "memory", "format": "{used} / {total}" ,"keyColor": "red", "valueColor": "red"  },
+    { "type": "editor","keyColor": "red", "valueColor": "red"  },
     { "type": "separator",       "keyColor": "red", "valueColor": "red" },
 
     "break",

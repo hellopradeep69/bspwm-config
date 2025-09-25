@@ -45,7 +45,7 @@ return {
 			kotlin = { "ktlint" },
 			go = { "gofmt" },
 			rust = { "rustfmt" },
-			markdown = { "prettier" },
+			-- markdown = { "prettier" },
 			yaml = { "prettier" },
 			toml = { "taplo" },
 			-- add more here, like:
