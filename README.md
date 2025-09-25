@@ -88,7 +88,6 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 | Keys             | Action                        |
 | ---------------- | ----------------------------- |
 | `super + Return` | Open **WezTerm**              |
-| `super + w`      | Open **Kitty**                |
 | `Pause`          | Kill apps via `rofi-pkill.sh` |
 
 ---
@@ -97,10 +96,7 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 
 | Keys                | Action                            |
 | ------------------- | --------------------------------- |
-| `super + y`         | Open **YouTube app** in Brave     |
 | `super + b`         | Open **Zen browser** (or Firefox) |
-| `super + shift + b` | Open **Brave browser**            |
-| `super + o`         | Open **Obsidian Notes App**       |
 
 ---
 
@@ -122,6 +118,9 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 | `super + shift + space`     | Toggle floating/tiling mode           |
 | `super + x`                 | Hide focused window                   |
 | `super + shift + x`         | Unhide last hidden window             |
+| `alt + enter`               | Toggle fullscreen                     |
+| `alt + h`               | Focus to Previous window|
+| `alt + l`               |  Focus to Next window                    |
 
 ---
 
@@ -172,7 +171,6 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 
 | Keys            | Action                                   |
 | --------------- | ---------------------------------------- |
-| `super + m`     | Open **Kew** scratchpad (kitty terminal) |
 | `super + space` | Ranger in WezTerm floating window        |
 | `super + s`     | Quick notes scratchpad (WezTerm + nvim)  |
 
