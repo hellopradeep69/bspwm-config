@@ -242,7 +242,8 @@ find_dirs() {
             path="$entry"
         fi
 
-        [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print
+        [[ -d "$path" ]] && find ~ -mindepth 1 -maxdepth 3 -type d -not -path '*/\.git*'
+        # [[ -d "$path" ]] && find "$path" -mindepth 1 -maxdepth 3 "${depth:-${TS_MAX_DEPTH:-1}}" -path '*/.git' -prune -o -type d -print
     done
 }
 
@@ -318,7 +319,12 @@ if [[ ! -z $session_cmd ]]; then
 elif [[ ! -z $user_selected ]]; then
     selected="$user_selected"
 else
-    selected=$(find_dirs | fzf)
+    selected=$(find_dirs | fzf \
+        --prompt="Select tmux item (q to quit): " \
+        --border \
+        --reverse \
+        --bind "j:down,k:up,q:abort" \
+        --cycle)
 fi
 
 if [[ -z $selected ]]; then

@@ -56,6 +56,20 @@ if [[ -n "${ws_map[$prefix]}" ]]; then
 fi
 
 # ==============================
+# Move focused window to workspace
+# ==============================
+if [[ "$prefix" == "move" ]]; then
+    # Example: "move one" -> move focused node to workspace 1
+    if [[ -n "${ws_map[$query]}" ]]; then
+        bspc node -d "${ws_map[$query]}"
+        exit 0
+    else
+        notify-send "Unknown workspace '$query'"
+        exit 1
+    fi
+fi
+
+# ==============================
 # Handle prefixes
 # ==============================
 case "$prefix" in

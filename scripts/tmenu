@@ -15,12 +15,27 @@ list_sessions() {
 
 format_session() {
     local line="$1"
-    local name ts date_str
+    local name ts date_str marker
+
+    # Get current tmux session if inside tmux
+    current_session=""
+    if [ -n "$TMUX" ]; then
+        current_session=$(tmux display-message -p '#S')
+    fi
+
     name=$(echo "$line" | awk '{print $1}')
     ts=$(echo "$line" | grep -oP '\d{10}')
     date_str=$(date -d @"$ts" '+%b %d %Y %H:%M')
+
+    # Mark the current session with a star or text
+    if [ "$name" == "$current_session" ]; then
+        marker="[attached]"
+    else
+        marker=""
+    fi
+
     # echo "$name (${line#* } created: $date_str)"
-    echo "$name (created: $date_str)"
+    echo "$name (created: $date_str) $marker"
 }
 
 session_exists() {
@@ -64,7 +79,8 @@ create_template_session() {
 # BUILD SESSION LIST
 # -------------------------------
 sessions=""
-existing=$(list_sessions)
+existing=$(list_sessions | sort -t: -k2,2n)
+# existing=$(list_sessions)
 if [ -n "$existing" ]; then
     while read -r line; do
         sessions+=$(format_session "$line")$'\n'
@@ -95,13 +111,13 @@ selected_session=$(echo -e "$sessions" | fzf \
 if [[ "$selected_session" == "[Session from Directory]" ]]; then
     # Use fd if available, otherwise fallback to find
     if command -v fd >/dev/null 2>&1; then
-        dir=$(fd . ~/ --type d --follow --exclude .git --max-depth 1 | fzf \
+        dir=$(find ~ -mindepth 1 -maxdepth 3 -type d -not -path '*/\.git*' 2>/dev/null | fzf \
             --prompt="Select directory: " \
             --preview 'ls --color=always {}' \
             --preview-window=right:30%:wrap \
             --border --reverse --bind "j:down,k:up,q:abort")
     else
-        dir=$(find ~ -mindepth 1 -maxdepth 3 -type d -not -path '*/\.git*' 2>/dev/null | fzf \
+        dir=$(fd . ~/ --type d --follow --exclude .git --max-depth 1 | fzf \
             --prompt="Select directory: " \
             --preview 'ls --color=always {}' \
             --preview-window=right:30%:wrap \
@@ -170,13 +186,13 @@ if [[ "$selected_session" == "[Delete session]" ]]; then
         # List sessions with extra info for clarity
         del_session=$(
             tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" |
-                fzf --prompt="Select session to delete (q to quit): " \
-                    \
-                    --border \
-                    --reverse \
-                    --bind "j:down,k:up,q:abort" # --height=12 \
+                while read -r line; do
+                    format_session "$line"
+                done | fzf --prompt="Select session to delete (q to quit): " \
+                --border \
+                --cycle --reverse \
+                --bind "j:down,k:up,q:abort"
         )
-
         # Exit if user pressed q or nothing selected
         [ -z "$del_session" ] && break
 
