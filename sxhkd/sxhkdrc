@@ -28,6 +28,11 @@ super + q
 super + shift + r
     bspc wm -r; pkill -USR1 -x sxhkd
 
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
 # Move between windows
 super + {h,j,k,l}
 	bspc node -f {west,south,north,east}
@@ -186,7 +191,7 @@ super + s
 Scroll_Lock
     ~/.local/bin/toggle_keyboard_layout.sh
     
-# xdotool key Escape
+    # xdotool key Escape
 alt + space
     ~/.local/bin/internet.sh
 
