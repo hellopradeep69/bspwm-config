@@ -21,9 +21,12 @@ format_session() {
     ts=$(echo "$line" | grep -oP '\d{10}')
     date_str=$(date -d @"$ts" '+%b %d %Y %H:%M' 2>/dev/null || echo "")
 
+    # Count total panes across all windows
+    total_panes=$(tmux list-windows -t "$name" -F "#{window_panes}" 2>/dev/null | awk '{s+=$1} END{print s}')
+
     # attached marked in existing session if you are attach to it
     marker=""
-    [ "$name" == "$current_session" ] && marker="[attached]"
+    [ "$name" == "$current_session" ] && marker="*"
 
     # Check if session has multiple panes in any window
     if tmux list-windows -t "$name" -F "#{window_panes}" | grep -q '[2-9]'; then
@@ -32,8 +35,7 @@ format_session() {
         smarker=""
     fi
 
-    echo "$name (created: $date_str) $smarker $marker "
-    # echo "[$name] $marker"
+    printf "%-15s [%d pane(s)] %s %s\n" "$name" "$total_panes" "$marker" "$smarker"
 }
 
 session_exists() {
@@ -44,7 +46,7 @@ session_exists() {
 # Exclude Directories Mention
 # -------------------------------
 EXCLUDE_DIRS=(~/.tmux ~/Templates ~/.cache ~/.rustup ~/.npm ~/.zen ~/.linuxmint
-    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes)
+    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf)
 
 # Build find exclude arguments
 exclude_args=""
