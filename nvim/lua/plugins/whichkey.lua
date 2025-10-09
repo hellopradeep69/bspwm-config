@@ -3,7 +3,6 @@ return {
   event = "VeryLazy",
   opts_extend = { "spec" },
   opts = {
-    ---@type wk.Win.opts
     win = {
       no_overlap = true,
       -- width = 1,
@@ -44,17 +43,65 @@ return {
         mode = { "n", "v" },
         -- { "<leader>H", "<cmd>Grapple toggle<cr>", hidden = true },
         -- { "<leader>h", "<cmd>Grapple toggle_tags<cr>", hidden = true },
-        { "<leader>/", function() Snacks.picker.grep() end , hidden = true},
-        { "<leader><space>", function() Snacks.picker.smart() end, hidden = true },
-        { "<leader>,", function() Snacks.picker.buffers() end, hidden = true },
-        { "<leader><space>", function() Snacks.picker.smart() end, hidden = true },
-        { "<leader>:", function() Snacks.picker.command_history() end, hidden = true },
-        { "<leader>.",  function() Snacks.scratch() end, hidden = true },
+        { "<leader>?", hidden = true },
+        { "<leader>`", hidden = true },
+        { "<leader>L", hidden = true },
+        { "<leader>|", hidden = true },
+        { "<leader>l", hidden = true },
+        { "<leader>y", hidden = true },
+        { "<leader>e", hidden = true },
+        { "<leader>E", hidden = true },
+        { "<leader>H", hidden = true },
+        { "<leader>h", hidden = true },
+        { "<leader>us", hidden = true },
+        { "<leader>S", hidden = true },
+        {
+          "<leader>/",
+          function()
+            Snacks.picker.grep()
+          end,
+          hidden = true,
+        },
+        {
+          "<leader><space>",
+          function()
+            Snacks.picker.smart()
+          end,
+          hidden = true,
+        },
+        {
+          "<leader>,",
+          function()
+            Snacks.picker.buffers()
+          end,
+          hidden = true,
+        },
+        {
+          "<leader><space>",
+          function()
+            Snacks.picker.smart()
+          end,
+          hidden = true,
+        },
+        {
+          "<leader>:",
+          function()
+            Snacks.picker.command_history()
+          end,
+          hidden = true,
+        },
+        {
+          "<leader>.",
+          function()
+            Snacks.scratch()
+          end,
+          hidden = true,
+        },
         { "<leader>p", group = "preview" },
         { "<leader><tab>", group = "tabs" },
         { "<leader>c", group = "code" },
-        { "<leader>d", group = "debug" },
-        { "<leader>dp", group = "profiler" },
+        { "<leader>d", group = "delete" },
+        { "<leader>dp", hidden = true },
         { "<leader>f", group = "file/find" },
         { "<leader>g", group = "git" },
         { "<leader>gh", group = "hunks" },
@@ -67,6 +114,7 @@ return {
         { "g", group = "goto" },
         { "gs", group = "surround" },
         { "z", group = "fold" },
+        -- { "z", hidden = true },
         {
           "<leader>b",
           group = "buffer",

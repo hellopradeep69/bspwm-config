@@ -1,27 +1,30 @@
-
 return {
+
   "mason-org/mason.nvim",
-  lazy = false, -- load immediately
-  keys = {
-    { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" },
-  },
-  dependencies = {
-    { "mason-org/mason-lspconfig.nvim", config = function() end },
-    "neovim/nvim-lspconfig",
-  },
+  cmd = "Mason",
+  keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
+  build = ":MasonUpdate",
+  opts_extend = { "ensure_installed" },
   opts = {
-    ensure_installed = { "stylua", "shfmt" }, -- mason tools
-    servers = { "lua_ls", "pyright", "html", "cssls", "clangd" }, -- LSP servers
+    ensure_installed = {
+      "stylua",
+      "shfmt",
+    },
   },
+  ---@param opts MasonSettings | {ensure_installed: string[]}
   config = function(_, opts)
-    local mason = require("mason")
+    require("mason").setup(opts)
     local mr = require("mason-registry")
-    local mlsp = require("mason-lspconfig")
+    mr:on("package:install:success", function()
+      vim.defer_fn(function()
+        -- trigger FileType event to possibly load this newly installed LSP server
+        require("lazy.core.handler.event").trigger({
+          event = "FileType",
+          buf = vim.api.nvim_get_current_buf(),
+        })
+      end, 100)
+    end)
 
-    -- Setup mason
-    mason.setup(opts)
-
-    -- Auto-install mason tools
     mr.refresh(function()
       for _, tool in ipairs(opts.ensure_installed) do
         local p = mr.get_package(tool)
@@ -29,39 +32,6 @@ return {
           p:install()
         end
       end
-    end)
-
-    -- Auto-install LSP servers
-    mlsp.setup({
-      ensure_installed = opts.servers,
-      automatic_installation = true,
-    })
-
-    -- Configure servers
-    for _, server in ipairs(opts.servers) do
-      -- Example of server-specific config
-      if server == "lua_ls" then
-        vim.lsp.config("lua_ls", {
-          settings = {
-            Lua = {
-              workspace = { checkThirdParty = false },
-              hint = { enable = true },
-            },
-          },
-        })
-      else
-        vim.lsp.config(server, {}) -- default config
-      end
-
-      -- Enable server (activates for its filetypes)
-      vim.lsp.enable(server)
-    end
-
-    -- Optional: re-trigger FileType after installs
-    mr:on("package:install:success", function()
-      vim.defer_fn(function()
-        vim.cmd("doautocmd FileType")
-      end, 100)
     end)
   end,
 }
