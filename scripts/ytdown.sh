@@ -8,18 +8,61 @@ removeit() {
     rm "$cache" && rm "$crop"
 }
 
-echo "-----------------YTDOWN-----------------"
-echo "Enter a url to download : "
-read -r url
-# echo "$url" >>$HOME/.tdown.txt
-echo "$url" >>"$cache"
+title() {
+    echo " "
+    echo "░██     ░██    ░██           ░██                                         "
+    echo " ░██   ░██     ░██           ░██                                         "
+    echo "  ░██ ░██   ░████████  ░████████  ░███████  ░██    ░██    ░██ ░████████  "
+    echo "   ░████       ░██    ░██    ░██ ░██    ░██ ░██    ░██    ░██ ░██    ░██ "
+    echo "    ░██        ░██    ░██    ░██ ░██    ░██  ░██  ░████  ░██  ░██    ░██ "
+    echo "    ░██        ░██    ░██   ░███ ░██    ░██   ░██░██ ░██░██   ░██    ░██ "
+    echo "    ░██         ░████  ░█████░██  ░███████     ░███   ░███    ░██    ░██ "
+    echo "                                                                         "
+    echo "                                                                         "
+    echo "                                                                         "
+    echo " "
+    echo " "
+}
 
-# it collect first 17 char and write down in a file
-head -c 17 "$cache" >>"$crop"
-read -r check <"$crop"
-# echo "$check"
-# cat "$cache"
-# cat "$crop"
+get_info() {
+    echo "-----------------YTDOWN-----------------"
+    echo " "
+    echo "Enter a url to download(q to quit) : "
+    read -r url
+    # echo "$url" >>$HOME/.tdown.txt
+    echo "$url" >>"$cache"
+
+    # it collect first 17 char and write down in a file
+    head -c 17 "$cache" >>"$crop"
+    read -r check <"$crop"
+    # echo "$check"
+    # cat "$cache"
+    # cat "$crop"
+}
+
+open_menu() {
+    echo " "
+    echo "Take a moment and glaze at avail option "
+    echo " "
+    echo "do you want best or custom :"
+    echo "=== === === === === === === === === === === === ==="
+    echo "[B]:Best(type B)"
+    echo "[C]:Custom(type C){SOON! select B for now}"
+    echo "[Q]:Quit(type Q)"
+    echo "=== === === === === === === === === === === === ==="
+    read -r option
+}
+
+done_done() {
+    notify-send "Downloaded" "Thanks for using Ytdown"
+}
+
+not_properly() {
+    notify-send "Invalid" "Try again"
+}
+
+title
+get_info
 
 # check if the url is valid
 if [[ "$check" == "https://youtu.be/" ]]; then
@@ -35,6 +78,7 @@ elif [[ "$check" == "https://youtube.c" ]]; then
 else
     echo "===Invalid !! Nice try==="
     echo "Try again"
+    not_properly
     removeit
     exit 0
 fi
@@ -42,15 +86,7 @@ fi
 # yt dlp format check the url
 yt-dlp -F "$url"
 
-echo "Take a moment and glaze at avail option "
-echo " "
-echo "do you want best or custom :"
-echo "=== === === === === === === === === === === === ==="
-echo "[B]:Best(type B)"
-echo "[C]:Custom(type C){SOON! select B for now}"
-echo "[Q]:Quit(type Q)"
-echo "=== === === === === === === === === === === === ==="
-read -r option
+open_menu
 
 if [[ "$option" = "C" ]]; then
     echo "~~~~custom menu soon~~~~"
@@ -60,6 +96,7 @@ if [[ "$option" = "C" ]]; then
     read -r Video
     echo "downloading in format Audio:"$Audio" and Video:"$Video" "
     yt-dlp -f "$Audio"+"$Video" "$url"
+    done_done
 elif [[ "$option" = "Q" ]]; then
     echo "Quit"
     removeit
@@ -74,18 +111,20 @@ else
     if [[ "$submenu" != "2" ]]; then
         echo " "
         echo "=== === === === === === === === === === === === ==="
-        echo "ONLY AUDIO"
+        echo "SELECTED ONLY AUDIO"
         echo "=== === === === === === === === === === === === ==="
         yt-dlp -f bestaudio --extract-audio --audio-format mp3 --audio-quality 192k "$url"
+        done_done
     else
         echo " "
         echo "=== === === === === === === === === === === === ==="
-        echo "VIDEO & AUDIO"
+        echo "SELECTED VIDEO & AUDIO"
         echo "=== === === === === === === === === === === === ==="
         echo "Download...."
         echo "High quality"
         yt-dlp -f best "$url"
         removeit
+        done_done
         #rm "$cache" && rm "$crop"
         exit 0
     fi

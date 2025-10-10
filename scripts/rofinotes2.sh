@@ -1,9 +1,9 @@
 #!/bin/sh
-
-TERMINAL="${TERMINAL:-wezterm}"     # Or foot, alacritty, etc.
-EDITOR="nvim"                     # You can change this to nano, micro, etc.
+# for writring notes and stuff i have in  mind
+TERMINAL="${TERMINAL:-wezterm}" # Or foot, alacritty, etc.
+EDITOR="nvim"                   # You can change this to nano, micro, etc.
 NOTE_DIR="$HOME/Notes/"
-DESKTOP="7"
+DESKTOP="4"
 
 mkdir -p "$NOTE_DIR"
 
@@ -28,9 +28,9 @@ select_note() {
     files=$(ls -1t "$NOTE_DIR" 2>/dev/null)
     choice=$(printf "New\n%s" "$files" | rofi -dmenu -p "Choose note or create new")
     case "$choice" in
-        New) new_note ;;
-        *.md) launch_note "$NOTE_DIR$choice" ;;
-        *) exit ;;
+    New) new_note ;;
+    *.md) launch_note "$NOTE_DIR$choice" ;;
+    *) exit ;;
     esac
 }
 

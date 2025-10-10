@@ -5,14 +5,14 @@ super + Return
 # open kitty terminal
 super + w
     kitty
-    
+ 
 # pkill rofi menu
 Pause
     ~/.local/bin/rofi-pkill.sh
 
 # browser
 super + b
-  /home/hellopradeep/.local/opt/zen-browser/zen
+  $HOME/.local/opt/zen-browser/zen
   # zen
   # firefox
 
@@ -27,7 +27,6 @@ super + q
 # Reload bspwm and sxhkd
 super + shift + r
     bspc wm -r; pkill -USR1 -x sxhkd
-
 
 # alternate between the tiled and monocle layout
 super + m
@@ -168,10 +167,6 @@ super + a
 #open clipboard using menu beside alt gr is menu button
 Menu 
     ~/.local/bin/rofi-clipboard 
-
-#open notes rofi menu
-super + shift + n
-    ~/.local/bin/rofinotes.sh 
 
 # open rnager in a wezterm terminal
 super + space

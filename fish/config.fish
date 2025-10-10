@@ -3,6 +3,7 @@ if status is-interactive
     # fzf change setting
     # set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,ctrl-j:page-down,ctrl-k:page-up,q:abort '
 
+    # important stuff
     # Locale fix for UTF-8 and tools like btop
     set -x LANG en_IN.UTF-8
     set -x LANGUAGE en_IN.UTF-8:en_US.UTF-8
@@ -37,12 +38,6 @@ if status is-interactive
     # Run Fastfetch on shell start without logo
     fastfetch --config ~/.config/fastfetch/config2.jsonc --logo-type none
     # cat anime.txt
-
-    # Alias to eza as ls 
-    # alias ls="eza --icons --group-directories-first"
-
-    # Alias to launch Brave browser
-    alias brave="brave-browser"
 
     # Alias to launch Telegram
     alias telegram="/opt/telegram/Telegram"

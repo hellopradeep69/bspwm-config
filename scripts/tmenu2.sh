@@ -26,7 +26,7 @@ format_session() {
 
     # attached marked in existing session if you are attach to it
     marker=""
-    [ "$name" == "$current_session" ] && marker="*"
+    [ "$name" == "$current_session" ] && marker=""
 
     # Check if session has multiple panes in any window
     if tmux list-windows -t "$name" -F "#{window_panes}" | grep -q '[2-9]'; then
@@ -46,7 +46,7 @@ session_exists() {
 # Exclude Directories Mention
 # -------------------------------
 EXCLUDE_DIRS=(~/.tmux ~/Templates ~/.cache ~/.rustup ~/.npm ~/.zen ~/.linuxmint
-    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf)
+    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf ~/.java ~/.cursor)
 
 # Build find exclude arguments
 exclude_args=""
