@@ -36,8 +36,8 @@ bspc rule -a Screenkey state=floating sticky=on border=off layer=above
 # /usr/local/bin/zen --new-instance --new-window about:blank &
 
 # Custom scripts
-# ~/.local/bin/capslock-notify.sh
 # ~/.local/bin/battery-notify.sh &
+~/.local/bin/keybind.sh &
 ~/.local/bin/battery-notify2.sh &
 ~/.config/i3/touchpad.sh &
 
@@ -48,7 +48,7 @@ bspc rule -a Screenkey state=floating sticky=on border=off layer=above
 #bspc config top_padding 0
 
 #default firefox
-xdg-settings set default-web-browser firefox.desktop &
+# xdg-settings set default-web-browser firefox.desktop &
 
 # Terminal to use
 TERMINAL=kitty

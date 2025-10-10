@@ -38,6 +38,9 @@ cpp)
 sh)
     CMD=("bash" "$FILE")
     ;;
+lua)
+    CMD=("lua" "$FILE")
+    ;;
 js)
     CMD=("node" "$FILE")
     ;;

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# frames=("<" "-" ">")
 frames=("|" "/" "-" "\\")
 i=0
 

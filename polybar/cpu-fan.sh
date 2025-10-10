@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Frames for fan animation
-# frames=("<" "\\" "|" "/" ">" "/" "|" "\\")
-frames=("<" "-" ">")
+# frames=("<" "-" ">")
+frames=("|" "/" "-" "\\")
 i=0
 
 # Function to calculate CPU usage %
@@ -12,7 +12,7 @@ get_cpu() {
     prev_idle=$idle
     prev_total=$((user + nice + system + idle + iowait + irq + softirq + steal))
 
-    sleep 0.5 # short delay
+    sleep 0.3 # short delay
 
     read cpu user nice system idle iowait irq softirq steal guest </proc/stat
     total=$((user + nice + system + idle + iowait + irq + softirq + steal))
