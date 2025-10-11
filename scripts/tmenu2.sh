@@ -75,18 +75,19 @@ menu="$sessions
 $dirs
 [Home]
 [Delete]
-
 "
 
 # -------------------------------
 # SELECT ITEM
 # -------------------------------
-selected=$(echo -e "$menu" | fzf \
-    --prompt="Select tmux item (q to quit): " \
-    --border \
-    --reverse \
-    --bind "j:down,k:up,q:abort" \
-    --cycle)
+selected=$(
+    echo -e "$menu" | fzf \
+        --prompt="Select tmux item (q to quit): " \
+        --border \
+        --reverse \
+        --bind "j:down,k:up,q:abort" \
+        --cycle
+)
 
 [ -z "$selected" ] && exit 0
 
@@ -109,7 +110,8 @@ elif [[ "$selected" == "[Delete]" ]]; then
         # List sessions with extra info for clarity
 
         del_session=$(
-            tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" |
+            tmux list-sessions -F "#{session_name} (#{windows} windows, created: #{session_created})" 2>/dev/null |
+                sort -t: -k2,2n |
                 while read -r line; do
                     format_session "$line"
                 done | fzf --prompt="Select session to delete (q to quit): " \

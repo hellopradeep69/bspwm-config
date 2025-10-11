@@ -50,6 +50,7 @@ js)
     ;;
 esac
 
+echo " "
 echo -e "${GREEN}=== OUTPUT ${FILE} ===${RESET}"
 # Run interactively (keeps stdin open)
 "${CMD[@]}"

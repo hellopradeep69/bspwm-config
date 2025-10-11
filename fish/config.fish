@@ -1,7 +1,8 @@
 if status is-interactive
 
     # fzf change setting
-    # set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,ctrl-j:page-down,ctrl-k:page-up,q:abort '
+    # set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,q:abort '
+    set -x FZF_DEFAULT_OPTS '--bind j:down,k:up,q:abort --border --cycle'
 
     # important stuff
     # Locale fix for UTF-8 and tools like btop
@@ -17,7 +18,6 @@ if status is-interactive
         bind -M insert jj 'set fish_bind_mode default; commandline -f repaint'
     end
 
-
     function ff
         fzf \
             --bind=j:down,k:up,q:abort \
@@ -28,7 +28,8 @@ if status is-interactive
     # run command tmenu when not in tmux
     if not set -q TMUX
         if type -q tmenu
-            ~/.local/bin/tmenu
+            ~/.local/bin/topen.sh d home
+            # ~/.local/bin/tmenu
         end
     end
 
@@ -48,6 +49,8 @@ if status is-interactive
     alias lh="ls -a"
 
     alias lvim="NVIM_APPNAME=Lazyvimed nvim"
+
+    alias nvchad="NVIM_APPNAME=nvchad nvim"
 
 end
 
