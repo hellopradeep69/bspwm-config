@@ -192,6 +192,5 @@ alt + space
 
 alt + h
     bspc desktop -f prev
-
 alt + l
     bspc desktop -f next

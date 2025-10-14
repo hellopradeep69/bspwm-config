@@ -29,7 +29,6 @@ if status is-interactive
     if not set -q TMUX
         if type -q tmenu
             ~/.local/bin/topen.sh d home
-            # ~/.local/bin/tmenu
         end
     end
 
@@ -51,7 +50,6 @@ if status is-interactive
     alias lvim="NVIM_APPNAME=Lazyvimed nvim"
 
     alias nvchad="NVIM_APPNAME=nvchad nvim"
-
 end
 
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

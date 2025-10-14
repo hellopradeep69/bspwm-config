@@ -46,7 +46,8 @@ session_exists() {
 # Exclude Directories Mention
 # -------------------------------
 EXCLUDE_DIRS=(~/.tmux ~/Templates ~/.cache ~/.rustup ~/.npm ~/.zen ~/.linuxmint
-    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf ~/.java ~/.cursor)
+    ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf
+    ~/.java ~/.cursor ~/fastfetch ~/Telegram)
 
 # Build find exclude arguments
 exclude_args=""
@@ -71,8 +72,7 @@ fi
 # Directories
 dirs=$(eval "find ~ -mindepth 1 -maxdepth 2 -type d -not -path '*/\.git*' $exclude_args 2>/dev/null")
 
-menu="$sessions
-$dirs
+menu="$sessions$dirs
 [Home]
 [Delete]
 "
