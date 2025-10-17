@@ -97,7 +97,7 @@ echo "📦 Backups will be stored in: $BACKUP_DEST"
 install_packages
 
 # Step 2: Backup + Restore configs
-for dir in bspwm fish kitty alacritty nitrogen nvim picom polybar ranger rofi fastfetch sxhkd dunst; do
+for dir in bspwm fish kitty alacritty nitrogen nvim picom polybar ranger rofi fastfetch sxhkd dunst zathura; do
     if [ -d "$BACKUP_DIR/$dir" ]; then
         backup_config "$dir"
         install_config "$dir"

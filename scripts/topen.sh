@@ -27,6 +27,8 @@ check_tmux() {
 window_create() {
 
     win_name="Code"
+    tmux kill-pane -t "$session_name:$win_name"
+
     if ! tmux list-windows -t "$session_name" | grep -q "$win_name"; then
         tmux new-window -t "$session_name" -n "$win_name" -c "#{pane_current_path}"
     else
@@ -38,13 +40,14 @@ code_start() {
     check_argument "$FILE"
     check_tmux
     window_create
-    tmux send-keys -t "$session_name:$win_name" "clear;code "$FILE"" Enter
+    tmux send-keys -t "$session_name:$win_name" "clear;code.sh "$FILE"" Enter
     tmux select-window -t "$session_name:$win_name"
 }
 
 exclude_dir() {
     EXCLUDE_DIRS=(~/.tmux ~/Templates ~/.cache ~/.rustup ~/.npm ~/.zen ~/.linuxmint
-        ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf ~/.java ~/.cursor)
+        ~/Public ~/.icons ~/Desktop ~/.cargo ~/.mozilla ~/.themes ~/.w3m ~/.golf
+        ~/.java ~/.cursor ~/fastfetch ~/Telegram)
 
     exclude_args=""
     for d in "${EXCLUDE_DIRS[@]}"; do
@@ -81,8 +84,7 @@ open_fzf() {
     if [[ -d "$selected" ]]; then
         dir="$selected"
 
-        rel_path=$(realpath --relative-to="$HOME" "$dir")
-        session_name=$(echo "$rel_path" | tr / _ | tr -cd '[:alnum:]_')
+        session_name=$(basename "$dir" | tr . _)
 
         if tmux has-session -t "$1" "$session_name" 2>/dev/null; then
             [ -n "$TMUX" ] && tmux switch-client -t "$session_name" || tmux attach -t "$session_name"
@@ -94,14 +96,13 @@ open_fzf() {
 
     else
         # Existing session
-        session_name=$(echo "$selected" | awk '{print $1}')
+        session_name=$(echo "$selected" | awk '{print $2}')
         [ -n "$TMUX" ] && tmux switch-client -t "$session_name" || tmux attach -t "$session_name"
     fi
 }
 
 open_it() {
-    rel_path=$(realpath --relative-to="$HOME" "$selected")
-    selected_name=$(echo "$rel_path" | tr / _ | tr -cd '[:alnum:]_')
+    selected_name=$(basename "$selected" | tr . _)
 
     # echo "$selected_name"
     if ! tmux has-session -t "$selected_name" 2>/dev/null; then

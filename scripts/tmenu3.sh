@@ -12,14 +12,12 @@ list_sessions() {
 
 format_session() {
     local line="$1"
-    local name ts date_str marker smarker
+    local name marker smarker
 
     current_session=""
     [ -n "$TMUX" ] && current_session=$(tmux display-message -p '#S')
 
     name=$(echo "$line" | awk '{print $1}')
-    ts=$(echo "$line" | grep -oP '\d{10}')
-    date_str=$(date -d @"$ts" '+%b %d %Y %H:%M' 2>/dev/null || echo "")
 
     # Count total panes across all windows
     total_panes=$(tmux list-windows -t "$name" -F "#{window_panes}" 2>/dev/null | awk '{s+=$1} END{print s}')
@@ -93,17 +91,7 @@ selected=$(
 # HANDLE SELECTION
 # -------------------------------
 
-if [[ "$selected" == "[Home]" ]]; then
-    session_name="home"
-    if session_exists "$session_name"; then
-        [ -n "$TMUX" ] && tmux switch-client -t "$session_name" || tmux attach -t "$session_name"
-    else
-        tmux new-session -d -s "$session_name" -c "$HOME" -n "main"
-        [ -n "$TMUX" ] && tmux switch-client -t "$session_name" || tmux attach -t "$session_name"
-    fi
-    exit 0
-
-elif [[ "$selected" == "[Delete]" ]]; then
+if [[ "$selected" == "[Delete]" ]]; then
     while true; do
         # List sessions with extra info for clarity
 
@@ -139,9 +127,8 @@ elif [[ "$selected" == "[Delete]" ]]; then
 elif [[ -d "$selected" ]]; then
     dir="$selected"
     # Unique session name: relative path to HOME
-    # rel_path=$(realpath --relative-to="$HOME" "$dir")
-    # session_name=$(echo "$rel_path" | tr / _ | tr -cd '[:alnum:]_')
-    session_name=$(basename "$dir" | tr . _)
+    rel_path=$(realpath --relative-to="$HOME" "$dir")
+    session_name=$(echo "$rel_path" | tr / _ | tr -cd '[:alnum:]_')
 
     if session_exists "$session_name"; then
         [ -n "$TMUX" ] && tmux switch-client -t "$session_name" || tmux attach -t "$session_name"
