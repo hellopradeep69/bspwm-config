@@ -18,13 +18,6 @@ if status is-interactive
         bind -M insert jj 'set fish_bind_mode default; commandline -f repaint'
     end
 
-    function ff
-        fzf \
-            --bind=j:down,k:up,q:abort \
-            --preview "bat --style=numbers --color=always {}" \
-            --preview-window=right:40%
-    end
-
     # run command tmenu when not in tmux
     if not set -q TMUX
         if type -q tmenu

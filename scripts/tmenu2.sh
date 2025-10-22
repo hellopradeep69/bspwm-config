@@ -26,7 +26,7 @@ format_session() {
 
     # attached marked in existing session if you are attach to it
     marker=""
-    [ "$name" == "$current_session" ] && marker=""
+    [ "$name" == "$current_session" ] && marker="*"
 
     # Check if session has multiple panes in any window
     if tmux list-windows -t "$name" -F "#{window_panes}" | grep -q '[2-9]'; then

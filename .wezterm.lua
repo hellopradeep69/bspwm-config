@@ -1,15 +1,6 @@
 -- Load wezterm API
 local wezterm = require("wezterm")
 
--- Update the right status bar (shown in tab bar) with the current time
-wezterm.on("update-right-status", function(window, pane)
-	local time = wezterm.strftime("%I:%M %p") -- 12-hour format with AM/PM
-	window:set_right_status(wezterm.format({
-		{ Foreground = { Color = "#ff6b6b" } }, -- Red color for time
-		{ Text = time .. " " },
-	}))
-end)
-
 -- Main configuration table
 return {
 	-- Choose a color scheme (uncomment one to use it)
@@ -22,12 +13,7 @@ return {
 
 	-- Cursor appearance settings
 	animation_fps = 60, -- Smooth cursor animation
-	cursor_blink_ease_in = "EaseOut",
-	cursor_blink_ease_out = "EaseOut",
-	-- default_cursor_style = "SteadyBar",
 	default_cursor_style = "SteadyBlock",
-	-- default_cursor_style = "BlinkingBlock",
-	cursor_blink_rate = 650,
 
 	-- Font settings
 	font = wezterm.font("JetBrainsMono Nerd Font", { weight = "Regular" }),
@@ -101,32 +87,6 @@ return {
 
 	-- Custom key bindings
 	keys = {
-		-- Switch to the left tab
-		{
-			key = "h",
-			mods = "CTRL",
-			action = wezterm.action.ActivateTabRelative(-1),
-		},
-		-- Switch to the right tab
-		{
-			key = "l",
-			mods = "CTRL",
-			action = wezterm.action.ActivateTabRelative(1),
-		},
-		-- Open new tab with Ctrl+T
-		{
-			key = "t",
-			mods = "ALT",
-			action = wezterm.action.SpawnTab("CurrentPaneDomain"),
-		},
-
-		-- Close current tab with Ctrl+W (with confirmation)
-		{
-			key = "w",
-			mods = "CTRL",
-			action = wezterm.action.CloseCurrentTab({ confirm = true }),
-		},
-
 		-- Ctrl+C to copy to clipboard
 		{
 			key = "c",
@@ -149,61 +109,6 @@ return {
 				key = "c",
 				mods = "CTRL",
 			}),
-		},
-
-		-- Alt+1 through Alt+9 to switch tabs
-		{ key = "1", mods = "ALT", action = wezterm.action.ActivateTab(0) },
-		{ key = "2", mods = "ALT", action = wezterm.action.ActivateTab(1) },
-		{ key = "3", mods = "ALT", action = wezterm.action.ActivateTab(2) },
-		{ key = "4", mods = "ALT", action = wezterm.action.ActivateTab(3) },
-		{ key = "5", mods = "ALT", action = wezterm.action.ActivateTab(4) },
-		{ key = "6", mods = "ALT", action = wezterm.action.ActivateTab(5) },
-		{ key = "7", mods = "ALT", action = wezterm.action.ActivateTab(6) },
-		{ key = "8", mods = "ALT", action = wezterm.action.ActivateTab(7) },
-		{ key = "9", mods = "ALT", action = wezterm.action.ActivateTab(8) },
-
-		-- -- Switch to the left tab
-		-- {
-		-- 	key = "h",
-		-- 	mods = "ALT",
-		-- 	action = wezterm.action.ActivateTabRelative(-1),
-		-- },
-		-- -- Switch to the right tab
-		-- {
-		-- 	key = "l",
-		-- 	mods = "ALT",
-		-- 	action = wezterm.action.ActivateTabRelative(1),
-		-- },
-		--
-		-- Pane Splitting
-
-		{
-			key = "d",
-			mods = "ALT",
-			action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
-		},
-		{
-			key = "s",
-			mods = "ALT",
-			action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
-		},
-		{
-			key = "q",
-			mods = "ALT",
-			action = wezterm.action.CloseCurrentPane({ confirm = true }),
-		},
-
-		{ key = "p", mods = "ALT", action = wezterm.action.ShowLauncher },
-
-		-- Pane Navigation (ALT+h/l/j/k)
-		{ key = "l", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Right") },
-		{ key = "h", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Left") },
-		{ key = "k", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Up") },
-		{ key = "j", mods = "ALT", action = wezterm.action.ActivatePaneDirection("Down") },
-		{
-			key = "p",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action.ActivateCommandPalette,
 		},
 	},
 }
