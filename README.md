@@ -94,9 +94,9 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 
 ## 🌐 Browsers & Apps
 
-| Keys                | Action                            |
-| ------------------- | --------------------------------- |
-| `super + b`         | Open **Zen browser** (or Firefox) |
+| Keys        | Action                            |
+| ----------- | --------------------------------- |
+| `super + b` | Open **Zen browser** (or Firefox) |
 
 ---
 
@@ -119,8 +119,8 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 | `super + x`                 | Hide focused window                   |
 | `super + shift + x`         | Unhide last hidden window             |
 | `alt + enter`               | Toggle fullscreen                     |
-| `alt + h`               | Focus to Previous window|
-| `alt + l`               |  Focus to Next window                    |
+| `alt + h`                   | Focus to Previous window              |
+| `alt + l`                   | Focus to Next window                  |
 
 ---
 
@@ -169,10 +169,10 @@ This document lists all custom **bspwm + sxhkd** keybindings in a clean table fo
 
 ## 🗂️ Scratchpads
 
-| Keys            | Action                                   |
-| --------------- | ---------------------------------------- |
-| `super + space` | Ranger in WezTerm floating window        |
-| `super + s`     | Quick notes scratchpad (WezTerm + nvim)  |
+| Keys            | Action                                  |
+| --------------- | --------------------------------------- |
+| `super + space` | Ranger in WezTerm floating window       |
+| `super + s`     | Quick notes scratchpad (WezTerm + nvim) |
 
 ---
 
@@ -267,15 +267,14 @@ zen
 
 ## ``
 
-````
-
 ## 🚀 Installation
 
 ### 1. Clone the repo
+
 ```bash
 git clone https://github.com/hellopradeep69/bspwm-config
 cd bspwm-config
-````
+```
 
 ### 2. Run the setup script
 
@@ -328,3 +327,8 @@ chmod +x ~/.config/polybar/launch.sh --colorblocks
     nitrogen ~/Pictures
     ```
     then pick the wallpaper from the UI.
+
+### qtile config
+
+- for more config
+  [qtile](https://github.com/hellopradeep69/Qtile-conf.git)
